@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTI | Secure Access</title>
+
+<style>
+:root {
+    --bg: #080d14;
+    --panel: #101923;
+    --card: #131f2c;
+    --green: #b5f36b;
+    --text: #edf3f7;
+    --muted: #8c9aa8;
+    --border: #263442;
+    --red: #ff7373;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    display: grid;
+    place-items: center;
+    padding: 25px;
+}
+
+.layout {
+    width: min(1050px, 100%);
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 30px 90px rgba(0,0,0,.35);
+}
+
+.visual {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(181,243,107,.13), transparent 45%),
+      linear-gradient(145deg,#152638,#0a121c 75%);
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.visual:after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border: 1px solid rgba(181,243,107,.12);
+    border-radius: 50%;
+    right: -150px;
+    top: 130px;
+    box-shadow: 0 0 0 35px rgba(181,243,107,.025),
+                0 0 0 75px rgba(181,243,107,.02);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--green);
+    color: #101923;
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.brand strong { font-size: 15px; letter-spacing: .5px; }
+.brand small { display: block; color: var(--muted); margin-top: 4px; }
+
+.visual-content {
+    position: relative;
+    z-index: 1;
+    max-width: 420px;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.visual h1 {
+    font-size: clamp(34px,4vw,49px);
+    line-height: 1.12;
+    letter-spacing: -1.8px;
+    margin: 19px 0;
+}
+
+.visual h1 span { color: var(--green); }
+
+.visual-content p {
+    color: #a6b3bf;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.system {
+    position: relative;
+    z-index: 1;
+    border: 1px solid #334454;
+    background: rgba(8,17,26,.55);
+    border-radius: 13px;
+    padding: 15px;
+}
+
+.system-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.live {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.live:before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 7px;
+}
+
+.system p {
+    font-size: 12px;
+    color: #a6b3bf;
+    margin: 13px 0 0;
+}
+
+.form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+}
+
+.form-content { width: 100%; max-width: 360px; }
+
+.form-content .eyebrow { margin-bottom: 12px; }
+
+.form-content h2 {
+    font-size: 29px;
+    letter-spacing: -1px;
+    margin: 0 0 9px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 31px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #c9d3dd;
+    margin: 19px 0 9px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    background: #0b131d;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    color: white;
+    font-size: 14px;
+    transition: .2s;
+}
+
+input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(181,243,107,.08);
+}
+
+input::placeholder { color: #647383; }
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--green);
+    color: #101923;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: .2s;
+}
+
+button:hover { background: #c8ff87; transform: translateY(-1px); }
+
+button.alt {
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+button.alt:hover { border-color: var(--green); background: #182532; }
+
+#msg {
+    min-height: 20px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--red);
+}
+
+#msg.ok { color: var(--green); }
+
+.note {
+    color: #788795;
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 24px;
+}
+
+@media(max-width:750px) {
+    body { padding: 12px; }
+    .layout { grid-template-columns: 1fr; }
+    .visual { padding: 27px; min-height: 270px; }
+    .visual h1 { font-size: 32px; }
+    .system { display: none; }
+    .form-side { padding: 35px 25px; }
+}
+</style>
+</head>
+
+<body>
+
+<main class="layout">
+
+    <section class="visual">
+
+        <div class="brand">
+            <div class="logo">CTI</div>
+            <div>
+                <strong>THREAT INTELLIGENCE</strong>
+                <small>Security Operations Platform</small>
+            </div>
+        </div>
+
+        <div class="visual-content">
+            <div class="eyebrow">INTELLIGENCE. AWARENESS. DEFENCE.</div>
+
+            <h1>
+                Stay ahead of the
+                <span>threat landscape.</span>
+            </h1>
+
+            <p>
+                Monitor emerging cyber threats, investigate vulnerabilities
+                and explore actionable intelligence through one unified platform.
+            </p>
+        </div>
+
+        <div class="system">
+            <div class="system-top">
+                <span>PLATFORM STATUS</span>
+                <span class="live">ACCESS PORTAL</span>
+            </div>
+            <p>Threat intelligence workspace · Secure authentication</p>
+        </div>
+
+    </section>
+
+    <section class="form-side">
+
+        <div class="form-content">
+
+            <div class="eyebrow">SECURE WORKSPACE</div>
+            <h2>Welcome back.</h2>
+            <p class="description">
+                Sign in to access your cyber threat intelligence workspace.
+            </p>
+
+            <label for="u">Username</label>
+            <input id="u" autocomplete="username" placeholder="Enter your username">
+
+            <label for="p">Password</label>
+            <input id="p" type="password" autocomplete="current-password"
+                   placeholder="Enter your password">
+
+            <button onclick="go('login')">Access workspace →</button>
+
+            <button class="alt" onclick="go('register')">
+                Create viewer account
+            </button>
+
+            <div id="msg"></div>
+
+            <p class="note">
+                New registrations receive the viewer role.
+                Contact an administrator if you need analyst or admin access.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+async function go(kind) {
+    const msg = document.getElementById("msg");
+    msg.className = "";
+    msg.textContent = "Please wait...";
+
+    const body = {
+        username: document.getElementById("u").value.trim(),
+        password: document.getElementById("p").value
+    };
+
+    try {
+        const r = await fetch("/api/" + kind, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(body)
+        });
+
+        const j = await r.json();
+
+        if (!r.ok) throw new Error(j.detail || "Request failed");
+
+        if (kind === "register") {
+            msg.className = "ok";
+            msg.textContent = "Account created. Sign in now.";
+            return;
+        }
+
+        localStorage.setItem("token", j.token);
+        localStorage.setItem("role", j.role);
+        localStorage.setItem("username", j.username);
+
+        location.replace("/");
+
+    } catch (e) {
+        msg.textContent = e.message;
+    }
+}
+
+document.addEventListener("keydown", e => {
+    if (e.key === "Enter") go("login");
+});
+</script>
+
+</body>
+</html>

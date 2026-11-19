@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTI | Intelligence Assistant</title>
+
+<style>
+:root {
+    --bg: #090f17;
+    --sidebar: #0d1722;
+    --panel: #121e2b;
+    --panel2: #172635;
+    --border: #273746;
+    --green: #b5f36b;
+    --text: #eaf0f5;
+    --muted: #8b9aa8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+button, input, select { font: inherit; }
+
+.app {
+    display: grid;
+    grid-template-columns: 265px minmax(0,1fr);
+    height: 100vh;
+}
+
+.sidebar {
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    padding: 25px 17px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 7px 26px;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    background: var(--green);
+    color: #101923;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+}
+
+.brand strong { font-size: 13px; letter-spacing: .5px; }
+.brand small { display: block; color: var(--muted); font-size: 10px; margin-top: 4px; }
+
+.side-label {
+    color: #647585;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 10px 9px;
+}
+
+.nav-link {
+    display: block;
+    text-decoration: none;
+    color: #a9b6c2;
+    padding: 12px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.nav-link:hover { background: var(--panel2); color: white; }
+
+.nav-link.active {
+    background: rgba(181,243,107,.10);
+    color: var(--green);
+    border: 1px solid rgba(181,243,107,.14);
+}
+
+.section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #c4ced7;
+    padding: 24px 9px 11px;
+}
+
+#chips {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+#chips button {
+    background: transparent;
+    color: #9baab7;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    text-align: left;
+    padding: 11px 10px;
+    font-size: 11px;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#chips button:before {
+    content: "↗";
+    color: var(--green);
+    margin-right: 9px;
+}
+
+#chips button:hover {
+    background: var(--panel2);
+    border-color: var(--border);
+    color: white;
+}
+
+.side-bottom {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+}
+
+.side-status {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #101c28;
+}
+
+.side-status span {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.side-status strong {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 600;
+}
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100vh;
+}
+
+.topbar {
+    min-height: 75px;
+    padding: 14px 30px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.topbar h2 { font-size: 14px; margin: 0 0 5px; }
+.topbar p { font-size: 10px; color: var(--muted); margin: 0; }
+
+.top-actions { display: flex; gap: 9px; }
+
+.top-actions a, .top-actions button {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.top-actions a:hover, .top-actions button:hover {
+    border-color: var(--green);
+}
+
+.content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    width: min(1050px,100%);
+    margin: 0 auto;
+    padding: 27px 35px 22px;
+}
+
+.intro { margin-bottom: 20px; }
+
+.eyebrow {
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.intro h1 {
+    font-size: 27px;
+    letter-spacing: -1px;
+    margin: 9px 0 6px;
+}
+
+.intro p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+#box {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    background: #0d1722;
+    border-radius: 13px;
+    padding: 22px;
+    scrollbar-width: thin;
+    scrollbar-color: #344757 transparent;
+}
+
+.welcome {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.welcome-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 17px;
+    display: grid;
+    place-items: center;
+    color: var(--green);
+    font-size: 27px;
+    background: rgba(181,243,107,.10);
+    border: 1px solid rgba(181,243,107,.18);
+    margin-bottom: 18px;
+}
+
+.welcome h2 { font-size: 19px; margin: 0 0 9px; }
+
+.welcome p {
+    max-width: 390px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.m {
+    max-width: 82%;
+    padding: 14px 16px;
+    border-radius: 11px;
+    margin: 12px 0;
+    white-space: pre-wrap;
+    line-height: 1.8;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.user {
+    background: #263b32;
+    color: #e7f5e9;
+    margin-left: auto;
+    border: 1px solid #3b5946;
+    border-bottom-right-radius: 3px;
+}
+
+.bot {
+    background: #172635;
+    color: #d9e2e9;
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 3px;
+}
+
+.src {
+    border-top: 1px solid #344454;
+    margin-top: 13px;
+    padding-top: 10px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.src div { margin: 7px 0; }
+
+.src a {
+    color: var(--green);
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.src a:hover { text-decoration: underline; }
+
+.composer-area { padding-top: 15px; }
+
+.composer-hint {
+    display: flex;
+    justify-content: space-between;
+    color: #748493;
+    font-size: 10px;
+    margin: 0 4px 9px;
+}
+
+#form {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+#form:focus-within { border-color: #718d58; }
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: white;
+    font-size: 12px;
+}
+
+input::placeholder { color: #71808e; }
+
+select#platform {
+    padding: 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: 0;
+    font-size: 11px;
+    background: #0c1722;
+    color: #cbd5df;
+    cursor: pointer;
+}
+
+#form button {
+    background: var(--green);
+    color: #101923;
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#form button:hover { background: #cbff8c; }
+
+.footer-note {
+    text-align: center;
+    color: #647585;
+    font-size: 9px;
+    margin-top: 12px;
+}
+
+@media(max-width:750px) {
+    body { overflow: auto; }
+    .app { grid-template-columns: 1fr; height: 100dvh; }
+    .sidebar {
+        padding: 10px 14px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .brand { padding: 0 3px 9px; }
+    .side-label,.section-title,.side-bottom { display: none; }
+    .sidebar nav { display: flex; gap: 7px; }
+    .nav-link { flex: 1; margin: 0; text-align: center; }
+    #chips {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 5px 0;
+    }
+    #chips button {
+        white-space: nowrap;
+        border: 1px solid var(--border);
+    }
+    .workspace { min-height: 0; }
+    .topbar { padding: 12px 16px; min-height: 65px; }
+    .content { padding: 18px 13px 12px; }
+    .intro h1 { font-size: 23px; }
+    #box { padding: 13px; }
+    .m { max-width: 94%; }
+}
+
+@media(max-width:480px) {
+    .topbar { flex-wrap: wrap; }
+    .top-actions { width: 100%; }
+    .top-actions a,.top-actions button { flex: 1; text-align: center; }
+    #form { flex-wrap: wrap; }
+    select#platform { width: 100%; }
+    input { width: 100%; }
+    #form button { width: 100%; }
+    .composer-hint span:last-child { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="logo">CTI</div>
+        <div>
+            <strong>THREAT INTEL</strong>
+            <small>AI Investigation Workspace</small>
+        </div>
+    </div>
+
+    <div class="side-label">NAVIGATION</div>
+
+    <nav>
+        <a href="/" class="nav-link">▦ &nbsp; Threat dashboard</a>
+        <a href="/chat-ui" class="nav-link active">◈ &nbsp; AI assistant</a>
+    </nav>
+
+    <div class="section-title">SUGGESTED INVESTIGATIONS</div>
+
+    <div id="chips"></div>
+
+    <div class="side-bottom">
+        <div class="side-status">
+            <span>ASSISTANT WORKSPACE</span>
+            <strong>● Local intelligence assistant</strong>
+        </div>
+    </div>
+
+</aside>
+
+<section class="workspace">
+
+    <header class="topbar">
+        <div>
+            <h2>Intelligence Assistant</h2>
+            <p>Cyber threat investigation and analysis</p>
+        </div>
+
+        <div class="top-actions">
+            <a href="/">← Dashboard</a>
+            <button id="logout">Logout</button>
+        </div>
+    </header>
+
+    <main class="content">
+
+        <section class="intro">
+            <div class="eyebrow">AI-POWERED INVESTIGATION</div>
+            <h1>What would you like to investigate?</h1>
+            <p>
+                Ask questions about vulnerabilities, malware, indicators
+                and emerging threat activity.
+            </p>
+        </section>
+
+        <div id="box">
+            <div class="welcome">
+                <div class="welcome-icon">◈</div>
+                <h2>CTI Intelligence Assistant</h2>
+                <p>
+                    Start an investigation by asking a question or choosing
+                    one of the suggested queries. Your intelligence assistant
+                    is ready to help.
+                </p>
+            </div>
+        </div>
+
+        <div class="composer-area">
+
+            <div class="composer-hint">
+                <span>MESSAGE COMPOSER</span>
+                <span>Choose a platform and enter your query</span>
+            </div>
+
+            <form id="form">
+
+                <select id="platform">
+                    <option value="general">General</option>
+                    <option value="windows">Windows</option>
+                    <option value="linux">Linux</option>
+                    <option value="android">Android</option>
+                </select>
+
+                <input id="q"
+                    placeholder="Ask about threats, CVEs, malware or indicators..."
+                    autocomplete="off">
+
+                <button type="submit">Send ↗</button>
+
+            </form>
+
+            <div class="footer-note">
+                Verify critical security findings against their original sources.
+            </div>
+
+        </div>
+
+    </main>
+
+</section>
+
+</div>
+
+<script>
+const token = localStorage.getItem("token");
+
+if (!token) location.replace("/login");
+
+const box = document.getElementById("box");
+
+function add(who, text) {
+    const welcome = box.querySelector(".welcome");
+    if (welcome) welcome.remove();
+
+    const d = document.createElement("div");
+    d.className = "m " + who;
+    d.textContent = text;
+
+    box.appendChild(d);
+    box.scrollTop = box.scrollHeight;
+
+    return d;
+}
+
+async function api(path, body) {
+    const r = await fetch(path, {
+        method: body ? "POST" : "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token
+        },
+        body: body ? JSON.stringify(body) : undefined
+    });
+
+    if (r.status === 401) {
+        localStorage.clear();
+        location.replace("/login");
+        throw new Error("Login required");
+    }
+
+    const j = await r.json();
+
+    if (!r.ok) throw new Error(j.detail || "Request failed");
+
+    return j;
+}
+
+async function ask(text) {
+    if (!text.trim()) return;
+
+    add("user", text);
+
+    const w = add("bot", "Analyzing your request...");
+
+    try {
+        const selectedPlatform =
+            document.getElementById("platform").value;
+
+        const j = await api("/api/chat", {
+            message: text,
+            platform: selectedPlatform
+        });
+
+        w.textContent = j.answer;
+
+        if (j.sources && j.sources.length) {
+            const s = document.createElement("div");
+            s.className = "src";
+
+            j.sources.forEach((x, i) => {
+                const line = document.createElement("div");
+
+                line.append(
+                    `[${i + 1}] ${x.title} (${x.status || "—"}/${x.severity || "—"}) `
+                );
+
+                if (x.url) {
+                    const a = document.createElement("a");
+
+                    a.href = x.url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.textContent = "View source";
+
+                    line.append(a);
+                }
+
+                s.append(line);
+            });
+
+            w.append(s);
+        }
+
+    } catch (e) {
+        w.textContent = "Error: " + e.message;
+    }
+}
+
+[
+    "Active threats on Windows",
+    "Resolved Linux threats",
+    "Evolving Android threats",
+    "Tell me about CVE-2024-6387",
+    "scan"
+].forEach(text => {
+    const b = document.createElement("button");
+
+    b.textContent = text;
+    b.onclick = () => ask(text);
+
+    document.getElementById("chips").appendChild(b);
+});
+
+document.getElementById("form").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const input = document.getElementById("q");
+    const v = input.value.trim();
+
+    if (!v) return;
+
+    input.value = "";
+    ask(v);
+});
+
+document.getElementById("logout").addEventListener("click", () => {
+    localStorage.clear();
+    location.replace("/login");
+});
+
+api("/api/history")
+    .then(h => h.forEach(m =>
+        add(m.role === "user" ? "user" : "bot", m.content)
+    ))
+    .catch(() => {});
+</script>
+
+</body>
+</html>

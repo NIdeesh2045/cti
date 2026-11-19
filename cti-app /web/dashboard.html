@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTI | Operations Center</title>
+
+<style>
+:root {
+    --bg: #090f17;
+    --sidebar: #0d1722;
+    --panel: #121e2b;
+    --panel2: #172534;
+    --border: #273746;
+    --green: #b5f36b;
+    --text: #eaf0f5;
+    --muted: #8b9aa8;
+    --red: #ff6868;
+    --orange: #ffb45f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+button, input, select { font: inherit; }
+
+.app {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 245px minmax(0,1fr);
+}
+
+.sidebar {
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    padding: 27px 17px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 9px 30px;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--green);
+    color: #111b23;
+    font-weight: 900;
+}
+
+.brand strong { font-size: 13px; letter-spacing: .6px; }
+.brand small { display: block; color: var(--muted); font-size: 10px; margin-top: 4px; }
+
+.nav-label {
+    color: #657686;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    padding: 10px 11px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin: 3px 0;
+    border-radius: 9px;
+    color: #a8b6c3;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.nav-link:hover { background: var(--panel2); color: white; }
+
+.nav-link.active {
+    background: rgba(181,243,107,.10);
+    color: var(--green);
+    border: 1px solid rgba(181,243,107,.14);
+}
+
+.nav-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.sidebar-bottom { margin-top: auto; }
+
+.connection {
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 13px;
+    margin: 15px 3px;
+    background: #101c28;
+}
+
+.connection-title {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.connection-status {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--green);
+}
+
+.connection-status:before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.main { min-width: 0; }
+
+.topbar {
+    min-height: 73px;
+    padding: 15px 35px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.breadcrumb { color: var(--muted); font-size: 12px; }
+.breadcrumb strong { color: var(--text); }
+
+.top-actions { display: flex; align-items: center; gap: 10px; }
+
+.user-info {
+    color: var(--muted);
+    font-size: 12px;
+    padding: 9px 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.action-btn {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.action-btn:hover { border-color: var(--green); }
+
+.action-btn.primary {
+    background: var(--green);
+    color: #101923;
+    border-color: var(--green);
+}
+
+.action-btn:disabled { opacity: .5; cursor: wait; }
+
+.content {
+    max-width: 1550px;
+    margin: auto;
+    padding: 34px 35px 50px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: clamp(27px,3vw,37px);
+    letter-spacing: -1.2px;
+    margin: 10px 0;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 14px;
+    margin: 30px 0;
+}
+
+.stat {
+    position: relative;
+    padding: 19px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+}
+
+.stat:after {
+    content: "";
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    right: -35px;
+    top: -35px;
+    background: rgba(181,243,107,.06);
+}
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.stat-mark {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+}
+
+.stat.red .stat-mark { background: var(--red); }
+.stat.orange .stat-mark { background: var(--orange); }
+.stat.blue .stat-mark { background: #73baff; }
+
+.number {
+    display: block;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-top: 15px;
+}
+
+.stat-caption {
+    font-size: 10px;
+    color: #6f8191;
+    margin-top: 5px;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.panel-head {
+    padding: 21px 23px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.panel-head h2 { font-size: 16px; margin: 0 0 5px; }
+.panel-head p { color: var(--muted); font-size: 11px; margin: 0; }
+
+.panel-tag {
+    color: var(--green);
+    font-size: 10px;
+    padding: 7px 10px;
+    background: rgba(181,243,107,.08);
+    border-radius: 6px;
+}
+
+.filters { padding: 20px 23px; }
+
+.search-wrap { position: relative; margin-bottom: 14px; }
+
+.search {
+    width: 100%;
+    padding: 14px 15px 14px 42px;
+    background: #0b141e;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    color: white;
+    outline: none;
+    font-size: 13px;
+}
+
+.search-wrap:before {
+    content: "⌕";
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    color: var(--muted);
+    font-size: 23px;
+}
+
+.search:focus, select:focus { border-color: var(--green); }
+
+.filter-row {
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr)) auto;
+    gap: 9px;
+}
+
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid var(--border);
+    background: #0b141e;
+    color: #cbd5df;
+    border-radius: 8px;
+    outline: none;
+    font-size: 11px;
+}
+
+.search-btn {
+    background: var(--green);
+    border: 0;
+    color: #101923;
+    padding: 0 19px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.report-list { padding: 20px 23px; }
+
+.report {
+    background: #0e1924;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+    transition: .2s;
+}
+
+.report:hover {
+    border-color: #647c70;
+    transform: translateY(-1px);
+}
+
+.report h3 {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 13px;
+}
+
+.report h3 a { color: #e8eff4; text-decoration: none; }
+.report h3 a:hover { color: var(--green); }
+
+.meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: #334453;
+    color: #d9e2e9;
+    font-weight: 700;
+}
+
+.sev-critical,.sev-high { background: #632d36; color: #ff9ca3; }
+.sev-medium { background: #5d482b; color: #ffd08b; }
+.sev-low { background: #214c3d; color: #a4e9c8; }
+
+.status-active { background: #542b32; color: #ff9b9b; }
+.status-resolved { background: #214c3d; color: #a4e9c8; }
+.status-evolving { background: #49355c; color: #d6b0fa; }
+.status-anticipated { background: #263e5a; color: #9ecbff; }
+
+.date,.source { color: #8393a1; font-size: 10px; }
+
+.summary {
+    color: #9eacb9;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 12px 0 0;
+}
+
+.report-footer {
+    margin-top: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.report-footer a {
+    color: var(--green);
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.empty,.error,.loading {
+    text-align: center;
+    padding: 35px 10px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.error { color: var(--red); }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 22px 0 4px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.pagination button {
+    padding: 9px 13px;
+    background: #172635;
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.pagination button:disabled { opacity: .35; cursor: not-allowed; }
+
+footer {
+    text-align: center;
+    color: #657686;
+    font-size: 10px;
+    padding: 15px;
+}
+
+@media(max-width:1050px) {
+    .filter-row { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .search-btn { min-height: 39px; }
+}
+
+@media(max-width:750px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+        padding: 12px 15px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .brand { padding: 0 5px 12px; }
+    .nav-label,.sidebar-bottom { display: none; }
+    .sidebar nav { display: flex; gap: 6px; }
+    .nav-link { flex: 1; justify-content: center; padding: 10px 5px; }
+    .topbar { padding: 14px 17px; }
+    .content { padding: 25px 15px; }
+    .stats { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+    .number { font-size: 27px; }
+}
+
+@media(max-width:480px) {
+    .topbar { flex-wrap: wrap; }
+    .top-actions { width: 100%; }
+    .user-info { display: none; }
+    .filter-row { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .search-btn { grid-column: span 2; }
+    .filters,.report-list { padding: 14px; }
+    .panel-head { padding: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="logo">CTI</div>
+        <div>
+            <strong>THREAT INTEL</strong>
+            <small>Operations Center</small>
+        </div>
+    </div>
+
+    <div class="nav-label">WORKSPACE</div>
+
+    <nav>
+        <a class="nav-link active" href="/">
+            <span class="nav-icon">▦</span> Overview
+        </a>
+
+        <a class="nav-link" href="/chat-ui">
+            <span class="nav-icon">◈</span> AI Assistant
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="connection">
+            <div class="connection-title">PLATFORM</div>
+            <div class="connection-status">Intelligence workspace</div>
+        </div>
+    </div>
+
+</aside>
+
+<div class="main">
+
+    <header class="topbar">
+        <div class="breadcrumb">Workspace / <strong>Threat overview</strong></div>
+
+        <div class="top-actions">
+            <span class="user-info" id="userInfo">Analyst workspace</span>
+            <button class="action-btn primary" id="refresh">↻ Refresh data</button>
+            <button class="action-btn" id="logout">Sign out</button>
+        </div>
+    </header>
+
+    <main class="content">
+
+        <section class="heading">
+            <div>
+                <div class="eyebrow">SECURITY INTELLIGENCE / OVERVIEW</div>
+                <h1>Threat operations</h1>
+                <p class="subtitle">
+                    Monitor vulnerabilities, malware activity, threat indicators
+                    and emerging cyber risks.
+                </p>
+            </div>
+        </section>
+
+        <section class="stats">
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Total threats</span><span class="stat-mark"></span>
+                </div>
+                <span class="number" id="total">—</span>
+                <div class="stat-caption">Collected intelligence records</div>
+            </div>
+
+            <div class="stat red">
+                <div class="stat-top">
+                    <span>Critical threats</span><span class="stat-mark"></span>
+                </div>
+                <span class="number" id="critical">—</span>
+                <div class="stat-caption">Highest severity classification</div>
+            </div>
+
+            <div class="stat orange">
+                <div class="stat-top">
+                    <span>High severity</span><span class="stat-mark"></span>
+                </div>
+                <span class="number" id="high">—</span>
+                <div class="stat-caption">High-priority intelligence</div>
+            </div>
+
+            <div class="stat blue">
+                <div class="stat-top">
+                    <span>Sources monitored</span><span class="stat-mark"></span>
+                </div>
+                <span class="number" id="sourcesCount">—</span>
+                <div class="stat-caption">Intelligence source coverage</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Active threats</span><span class="stat-mark"></span>
+                </div>
+                <span class="number" id="active">—</span>
+                <div class="stat-caption">Currently active threat records</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <span>Searchable threats</span><span class="stat-mark"></span>
+                </div>
+                <span class="number" id="searchable">—</span>
+                <div class="stat-caption">Available for intelligence search</div>
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <div class="panel-head">
+                <div>
+                    <h2>Threat intelligence feed</h2>
+                    <p>Search, filter and investigate collected threat reports.</p>
+                </div>
+                <span class="panel-tag">LIVE DATABASE</span>
+            </div>
+
+            <div class="filters">
+
+                <div class="search-wrap">
+                    <input class="search" id="search"
+                        placeholder="Search CVEs, malware, IP addresses, domains or hashes">
+                </div>
+
+                <div class="filter-row">
+
+                    <select id="type">
+                        <option value="">All types</option>
+                        <option>Vulnerability</option>
+                        <option>Malware</option>
+                        <option>Ransomware</option>
+                        <option>Phishing</option>
+                        <option>Data Breach</option>
+                        <option>Other</option>
+                    </select>
+
+                    <select id="severity">
+                        <option value="">All severities</option>
+                        <option>Critical</option>
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+
+                    <select id="platform">
+                        <option value="">All platforms</option>
+                    </select>
+
+                    <select id="status">
+                        <option value="">All lifecycle stages</option>
+                        <option>Active</option>
+                        <option>Evolving</option>
+                        <option>Anticipated</option>
+                        <option>Resolved</option>
+                        <option>Unclassified</option>
+                    </select>
+
+                    <select id="source">
+                        <option value="">All sources</option>
+                    </select>
+
+                    <button class="search-btn" id="searchBtn">Apply filters</button>
+
+                </div>
+            </div>
+
+            <div class="report-list">
+
+                <div id="reports" class="loading">
+                    Loading threat intelligence...
+                </div>
+
+                <div class="pagination">
+                    <button id="previous">← Previous</button>
+                    <span id="pageInfo">Page 1</span>
+                    <button id="next">Next →</button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer>CYBER THREAT INTELLIGENCE PLATFORM · CTI</footer>
+
+    </main>
+
+</div>
+</div>
+
+<script>
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+const $ = id => document.getElementById(id);
+
+if (!token) location.replace("/login");
+
+if (role !== "admin") $("refresh").style.display = "none";
+
+const username = localStorage.getItem("username");
+if (username) $("userInfo").textContent = username;
+
+let page = 1, pages = 1;
+const pageSize = 50;
+
+async function api(path, options = {}) {
+    const response = await fetch(path, {
+        ...options,
+        headers: {
+            ...(options.headers || {}),
+            Authorization: "Bearer " + token
+        }
+    });
+
+    if (response.status === 401) {
+        localStorage.clear();
+        location.replace("/login");
+        throw new Error("Login required");
+    }
+
+    const data = await response.json();
+
+    if (!response.ok)
+        throw new Error(data.detail || "Request failed");
+
+    return data;
+}
+
+function set(id, value) {
+    $(id).textContent = value ?? 0;
+}
+
+function populateSelect(id, values) {
+    const el = $(id);
+    const first = el.options[0];
+
+    el.replaceChildren(first);
+
+    values.forEach(v => {
+        if (!v) return;
+
+        const o = document.createElement("option");
+        o.value = v;
+        o.textContent = v;
+        el.appendChild(o);
+    });
+}
+
+async function loadDashboard() {
+    const d = await api("/api/dashboard");
+
+    set("total", d.total);
+    set("critical", d.critical);
+    set("high", d.high);
+    set("sourcesCount", d.sources_monitored);
+    set("active", d.active);
+    set("searchable", d.searchable);
+
+    populateSelect("platform", d.platforms || []);
+    populateSelect("source", d.sources || []);
+}
+
+function tag(value, cls = "") {
+    const el = document.createElement("span");
+    el.className = "tag " + cls;
+    el.textContent = value || "Unclassified";
+    return el;
+}
+
+function formatDate(value) {
+    if (!value) return "Date unavailable";
+
+    const d = new Date(value);
+
+    return isNaN(d) ? "Date unavailable" : d.toLocaleDateString();
+}
+
+function renderReports(reports) {
+    const root = $("reports");
+    root.replaceChildren();
+
+    if (!reports.length) {
+        root.className = "empty";
+        root.textContent = "No matching threat reports found.";
+        return;
+    }
+
+    root.className = "";
+
+    reports.forEach(r => {
+        const card = document.createElement("article");
+        card.className = "report";
+
+        const h = document.createElement("h3");
+        const a = document.createElement("a");
+
+        a.textContent = r.title || "Untitled threat report";
+
+        if (r.url) {
+            a.href = r.url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+        }
+
+        h.appendChild(a);
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+
+        meta.append(
+            tag(r.type),
+            tag(r.severity, "sev-" + (r.severity || "").toLowerCase()),
+            tag(r.status, "status-" + (r.status || "").toLowerCase())
+        );
+
+        const date = document.createElement("span");
+        date.className = "date";
+        date.textContent = formatDate(r.published_at);
+
+        const source = document.createElement("span");
+        source.className = "source";
+        source.textContent = r.source || "Unknown source";
+
+        meta.append(date, source);
+        card.append(h, meta);
+
+        if (r.summary) {
+            const p = document.createElement("p");
+            p.className = "summary";
+            p.textContent = r.summary;
+            card.appendChild(p);
+        }
+
+        const foot = document.createElement("div");
+        foot.className = "report-footer";
+
+        (r.platforms || []).forEach(p => {
+            foot.appendChild(tag(p));
+        });
+
+        const cves = (r.iocs || [])
+            .filter(x => x.type === "cve")
+            .map(x => x.value);
+
+        if (cves.length) {
+            const c = document.createElement("span");
+            c.className = "source";
+            c.textContent = cves.join(", ");
+            foot.appendChild(c);
+        }
+
+        card.appendChild(foot);
+        root.appendChild(card);
+    });
+}
+
+async function loadReports() {
+    const root = $("reports");
+
+    root.textContent = "Loading threat intelligence...";
+    root.className = "loading";
+
+    const params = new URLSearchParams({
+        q: $("search").value.trim(),
+        type: $("type").value,
+        severity: $("severity").value,
+        platform: $("platform").value,
+        status: $("status").value,
+        source: $("source").value,
+        page,
+        limit: pageSize
+    });
+
+    try {
+        const d = await api("/api/threats?" + params);
+
+        pages = Math.max(1, d.pages || 1);
+
+        renderReports(d.reports || []);
+
+        $("pageInfo").textContent =
+            `Page ${d.page} of ${pages} · ${d.total} reports`;
+
+        $("previous").disabled = page <= 1;
+        $("next").disabled = page >= pages;
+
+    } catch (e) {
+        root.textContent = "Could not load reports: " + e.message;
+        root.className = "error";
+    }
+}
+
+function search() {
+    page = 1;
+    loadReports();
+}
+
+$("searchBtn").addEventListener("click", search);
+
+$("search").addEventListener("keydown", e => {
+    if (e.key === "Enter") search();
+});
+
+["type", "severity", "platform", "status", "source"].forEach(id => {
+    $(id).addEventListener("change", search);
+});
+
+$("previous").addEventListener("click", () => {
+    if (page > 1) {
+        page--;
+        loadReports();
+    }
+});
+
+$("next").addEventListener("click", () => {
+    if (page < pages) {
+        page++;
+        loadReports();
+    }
+});
+
+$("logout").addEventListener("click", () => {
+    localStorage.clear();
+    location.replace("/login");
+});
+
+$("refresh").addEventListener("click", async () => {
+    const b = $("refresh");
+
+    b.disabled = true;
+    b.textContent = "Refreshing...";
+
+    try {
+        await api("/api/admin/refresh", {method: "POST"});
+
+        await loadDashboard();
+
+        page = 1;
+        await loadReports();
+
+    } catch (e) {
+        alert("Refresh failed: " + e.message);
+
+    } finally {
+        b.disabled = false;
+        b.textContent = "↻ Refresh data";
+    }
+});
+
+async function init() {
+    try {
+        await loadDashboard();
+
+    } catch (e) {
+        $("reports").textContent =
+            "Could not load dashboard: " + e.message;
+
+        $("reports").className = "error";
+        return;
+    }
+
+    await loadReports();
+}
+
+init();
+</script>
+
+</body>
+</html>
