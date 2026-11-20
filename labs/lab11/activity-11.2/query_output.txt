@@ -1,0 +1,407 @@
+[direct: mongos] test> 
+[direct: mongos] test> 
+[direct: mongos] test> | | | | | 
+[direct: mongos] test> 
+[direct: mongos] test> | | | | | 
+[direct: mongos] test> 
+[direct: mongos] test> 
+===== TIMESTAMP RANGE QUERY =====
+
+[direct: mongos] test> | 
+[direct: mongos] test> 
+[direct: mongos] test> Winning plan:
+
+[direct: mongos] test> {
+  stage: 'SINGLE_SHARD',
+  shards: [
+    {
+      shardName: 'shard1rs',
+      connectionString: 'shard1rs/shard1:27017',
+      serverInfo: {
+        host: '434db211012a',
+        port: 27017,
+        version: '7.0.45',
+        gitVersion: 'a52313e13ab55c9bddf7c3ff91dab286fa381796'
+      },
+      namespace: 'lab11db.hotspot_data',
+      indexFilterSet: false,
+      parsedQuery: {
+        '$and': [
+          {
+            ts: {
+              '$lt': ISODate('2025-01-02T00:00:00.000Z')
+            }
+          },
+          {
+            ts: {
+              '$gte': ISODate('2025-01-01T00:00:00.000Z')
+            }
+          }
+        ]
+      },
+      queryHash: '961540A5',
+      planCacheKey: 'C8A844E5',
+      optimizationTimeMillis: 0,
+      maxIndexedOrSolutionsReached: false,
+      maxIndexedAndSolutionsReached: false,
+      maxScansToExplodeReached: false,
+      winningPlan: {
+        stage: 'FETCH',
+        inputStage: {
+          stage: 'SHARDING_FILTER',
+          inputStage: {
+            stage: 'IXSCAN',
+            keyPattern: {
+              ts: 1
+            },
+            indexName: 'ts_1',
+            isMultiKey: false,
+            multiKeyPaths: {
+              ts: []
+            },
+            isUnique: false,
+            isSparse: false,
+            isPartial: false,
+            indexVersion: 2,
+            direction: 'forward',
+            indexBounds: {
+              ts: [
+                '[new Date(1735689600000), new Date(1735776000000))'
+              ]
+            }
+          }
+        }
+      },
+      rejectedPlans: []
+    }
+  ]
+}
+
+[direct: mongos] test> Execution statistics:
+
+[direct: mongos] test> {
+  nReturned: 10000,
+  executionTimeMillis: 10,
+  totalKeysExamined: 10000,
+  totalDocsExamined: 10000,
+  executionStages: {
+    stage: 'SINGLE_SHARD',
+    nReturned: 10000,
+    executionTimeMillis: 10,
+    totalKeysExamined: 10000,
+    totalDocsExamined: 10000,
+    totalChildMillis: Long('9'),
+    shards: [
+      {
+        shardName: 'shard1rs',
+        executionSuccess: true,
+        nReturned: 10000,
+        executionTimeMillis: 9,
+        totalKeysExamined: 10000,
+        totalDocsExamined: 10000,
+        executionStages: {
+          stage: 'FETCH',
+          nReturned: 10000,
+          executionTimeMillisEstimate: 0,
+          works: 10001,
+          advanced: 10000,
+          needTime: 0,
+          needYield: 0,
+          saveState: 10,
+          restoreState: 10,
+          isEOF: 1,
+          docsExamined: 10000,
+          alreadyHasObj: 0,
+          inputStage: {
+            stage: 'SHARDING_FILTER',
+            nReturned: 10000,
+            executionTimeMillisEstimate: 0,
+            works: 10001,
+            advanced: 10000,
+            needTime: 0,
+            needYield: 0,
+            saveState: 10,
+            restoreState: 10,
+            isEOF: 1,
+            chunkSkips: 0,
+            inputStage: {
+              stage: 'IXSCAN',
+              nReturned: 10000,
+              executionTimeMillisEstimate: 0,
+              works: 10001,
+              advanced: 10000,
+              needTime: 0,
+              needYield: 0,
+              saveState: 10,
+              restoreState: 10,
+              isEOF: 1,
+              keyPattern: {
+                ts: 1
+              },
+              indexName: 'ts_1',
+              isMultiKey: false,
+              multiKeyPaths: {
+                ts: []
+              },
+              isUnique: false,
+              isSparse: false,
+              isPartial: false,
+              indexVersion: 2,
+              direction: 'forward',
+              indexBounds: {
+                ts: [
+                  '[new Date(1735689600000), new Date(1735776000000))'
+                ]
+              },
+              keysExamined: 10000,
+              seeks: 1,
+              dupsTested: 0,
+              dupsDropped: 0
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+[direct: mongos] test> 
+[direct: mongos] test> 
+===== HASHED KEY RANGE QUERY =====
+
+[direct: mongos] test> | 
+[direct: mongos] test> 
+[direct: mongos] test> Winning plan:
+
+[direct: mongos] test> {
+  stage: 'SHARD_MERGE',
+  shards: [
+    {
+      shardName: 'shard1rs',
+      connectionString: 'shard1rs/shard1:27017',
+      serverInfo: {
+        host: '434db211012a',
+        port: 27017,
+        version: '7.0.45',
+        gitVersion: 'a52313e13ab55c9bddf7c3ff91dab286fa381796'
+      },
+      namespace: 'lab11db.even_data',
+      indexFilterSet: false,
+      parsedQuery: {
+        '$and': [
+          {
+            user_id: {
+              '$lt': ObjectId('ffffffffffffffffffffffff')
+            }
+          },
+          {
+            user_id: {
+              '$gte': ObjectId('000000000000000000000000')
+            }
+          }
+        ]
+      },
+      queryHash: '4CCF08CF',
+      planCacheKey: 'FD99942D',
+      optimizationTimeMillis: 0,
+      maxIndexedOrSolutionsReached: false,
+      maxIndexedAndSolutionsReached: false,
+      maxScansToExplodeReached: false,
+      winningPlan: {
+        stage: 'SHARDING_FILTER',
+        inputStage: {
+          stage: 'COLLSCAN',
+          filter: {
+            '$and': [
+              {
+                user_id: {
+                  '$lt': ObjectId('ffffffffffffffffffffffff')
+                }
+              },
+              {
+                user_id: {
+                  '$gte': ObjectId('000000000000000000000000')
+                }
+              }
+            ]
+          },
+          direction: 'forward'
+        }
+      },
+      rejectedPlans: []
+    },
+    {
+      shardName: 'shard2rs',
+      connectionString: 'shard2rs/shard2:27017',
+      serverInfo: {
+        host: '1c54594f02b3',
+        port: 27017,
+        version: '7.0.45',
+        gitVersion: 'a52313e13ab55c9bddf7c3ff91dab286fa381796'
+      },
+      namespace: 'lab11db.even_data',
+      indexFilterSet: false,
+      parsedQuery: {
+        '$and': [
+          {
+            user_id: {
+              '$lt': ObjectId('ffffffffffffffffffffffff')
+            }
+          },
+          {
+            user_id: {
+              '$gte': ObjectId('000000000000000000000000')
+            }
+          }
+        ]
+      },
+      queryHash: '4CCF08CF',
+      planCacheKey: 'FD99942D',
+      optimizationTimeMillis: 0,
+      maxIndexedOrSolutionsReached: false,
+      maxIndexedAndSolutionsReached: false,
+      maxScansToExplodeReached: false,
+      winningPlan: {
+        stage: 'SHARDING_FILTER',
+        inputStage: {
+          stage: 'COLLSCAN',
+          filter: {
+            '$and': [
+              {
+                user_id: {
+                  '$lt': ObjectId('ffffffffffffffffffffffff')
+                }
+              },
+              {
+                user_id: {
+                  '$gte': ObjectId('000000000000000000000000')
+                }
+              }
+            ]
+          },
+          direction: 'forward'
+        }
+      },
+      rejectedPlans: []
+    }
+  ]
+}
+
+[direct: mongos] test> Execution statistics:
+
+[direct: mongos] test> {
+  nReturned: 10000,
+  executionTimeMillis: 3,
+  totalKeysExamined: 0,
+  totalDocsExamined: 10000,
+  executionStages: {
+    stage: 'SHARD_MERGE',
+    nReturned: 10000,
+    executionTimeMillis: 3,
+    totalKeysExamined: 0,
+    totalDocsExamined: 10000,
+    totalChildMillis: Long('6'),
+    shards: [
+      {
+        shardName: 'shard1rs',
+        executionSuccess: true,
+        nReturned: 5027,
+        executionTimeMillis: 3,
+        totalKeysExamined: 0,
+        totalDocsExamined: 5027,
+        executionStages: {
+          stage: 'SHARDING_FILTER',
+          nReturned: 5027,
+          executionTimeMillisEstimate: 0,
+          works: 5028,
+          advanced: 5027,
+          needTime: 0,
+          needYield: 0,
+          saveState: 5,
+          restoreState: 5,
+          isEOF: 1,
+          chunkSkips: 0,
+          inputStage: {
+            stage: 'COLLSCAN',
+            filter: {
+              '$and': [
+                {
+                  user_id: {
+                    '$lt': ObjectId('ffffffffffffffffffffffff')
+                  }
+                },
+                {
+                  user_id: {
+                    '$gte': ObjectId('000000000000000000000000')
+                  }
+                }
+              ]
+            },
+            nReturned: 5027,
+            executionTimeMillisEstimate: 0,
+            works: 5028,
+            advanced: 5027,
+            needTime: 0,
+            needYield: 0,
+            saveState: 5,
+            restoreState: 5,
+            isEOF: 1,
+            direction: 'forward',
+            docsExamined: 5027
+          }
+        }
+      },
+      {
+        shardName: 'shard2rs',
+        executionSuccess: true,
+        nReturned: 4973,
+        executionTimeMillis: 3,
+        totalKeysExamined: 0,
+        totalDocsExamined: 4973,
+        executionStages: {
+          stage: 'SHARDING_FILTER',
+          nReturned: 4973,
+          executionTimeMillisEstimate: 0,
+          works: 4974,
+          advanced: 4973,
+          needTime: 0,
+          needYield: 0,
+          saveState: 4,
+          restoreState: 4,
+          isEOF: 1,
+          chunkSkips: 0,
+          inputStage: {
+            stage: 'COLLSCAN',
+            filter: {
+              '$and': [
+                {
+                  user_id: {
+                    '$lt': ObjectId('ffffffffffffffffffffffff')
+                  }
+                },
+                {
+                  user_id: {
+                    '$gte': ObjectId('000000000000000000000000')
+                  }
+                }
+              ]
+            },
+            nReturned: 4973,
+            executionTimeMillisEstimate: 0,
+            works: 4974,
+            advanced: 4973,
+            needTime: 0,
+            needYield: 0,
+            saveState: 4,
+            restoreState: 4,
+            isEOF: 1,
+            direction: 'forward',
+            docsExamined: 4973
+          }
+        }
+      }
+    ]
+  }
+}
+
+[direct: mongos] test> 

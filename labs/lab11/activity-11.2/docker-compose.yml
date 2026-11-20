@@ -1,0 +1,43 @@
+services:
+  config:
+    image: mongo:7.0
+    container_name: lab11-config
+    command: ["mongod", "--configsvr", "--replSet", "configrs", "--port", "27017", "--bind_ip_all"]
+    ports:
+      - "27220:27017"
+    volumes:
+      - config_data:/data/db
+
+  shard1:
+    image: mongo:7.0
+    container_name: lab11-shard1
+    command: ["mongod", "--shardsvr", "--replSet", "shard1rs", "--port", "27017", "--bind_ip_all"]
+    ports:
+      - "27218:27017"
+    volumes:
+      - shard1_data:/data/db
+
+  shard2:
+    image: mongo:7.0
+    container_name: lab11-shard2
+    command: ["mongod", "--shardsvr", "--replSet", "shard2rs", "--port", "27017", "--bind_ip_all"]
+    ports:
+      - "27219:27017"
+    volumes:
+      - shard2_data:/data/db
+
+  mongos:
+    image: mongo:7.0
+    container_name: lab11-mongos
+    command: ["mongos", "--configdb", "configrs/config:27017", "--bind_ip_all", "--port", "27017"]
+    ports:
+      - "27217:27017"
+    depends_on:
+      - config
+      - shard1
+      - shard2
+
+volumes:
+  config_data:
+  shard1_data:
+  shard2_data:
