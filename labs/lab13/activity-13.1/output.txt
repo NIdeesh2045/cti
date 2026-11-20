@@ -1,0 +1,73 @@
+LAB 13.1 – MONGODB REPLICA SET USING DOCKER COMPOSE
+===================================================
+
+1. DEPLOYMENT
+Three MongoDB 7.0 containers started successfully.
+
+- lab13-mongo1: Port 27317
+- lab13-mongo2: Port 27318
+- lab13-mongo3: Port 27319
+
+2. REPLICA SET INITIALIZATION
+Replica set name: rs0
+Initialization result: { ok: 1 }
+
+3. REPLICA SET HEALTH
+Final verified status:
+
+mongo1:27017 - SECONDARY - Health: 1
+mongo2:27017 - PRIMARY   - Health: 1
+mongo3:27017 - SECONDARY - Health: 1
+
+4. AUTHENTICATION
+Admin user: lab13_admin
+Role: root
+Authentication: SUCCESSFUL
+
+5. DATA REPLICATION
+Database: lab13_test
+Collection: records
+
+Test document inserted successfully on the primary.
+The same document was successfully retrieved from mongo2.
+
+Replication verification: SUCCESSFUL
+
+6. MANUAL FAILOVER
+Command: rs.stepDown(30)
+
+Old primary: mongo1
+New primary: mongo2
+
+Automatic primary election: SUCCESSFUL
+
+7. PROMETHEUS EXPORTER
+Image: percona/mongodb_exporter:0.40
+Host port: 29215
+Metrics endpoint: http://localhost:29215/metrics
+
+Verified metric:
+mongodb_up 1
+
+Exporter verification: SUCCESSFUL
+
+8. PYTHON FAILOVER TEST
+Python version: 3.12
+PyMongo version: 4.18.2
+
+Initial primary: mongo2:27017
+Test document insertion: SUCCESSFUL
+Primary stepdown: SUCCESSFUL
+New primary elected: mongo3:27017
+Write after failover: SUCCESS
+
+PyMongo failover verification: SUCCESSFUL
+
+9. FINAL RESULT
+Three-node MongoDB replica set deployed successfully.
+Keyfile authentication configured.
+Replication verified.
+Manual and PyMongo failover verified.
+Prometheus exporter metrics verified.
+
+LAB 13.1 COMPLETED SUCCESSFULLY.

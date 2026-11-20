@@ -1,0 +1,49 @@
+LAB 13.2 – KUBERNETES STATEFULSET FOR MONGODB
+==============================================
+
+1. KUBERNETES ENVIRONMENT
+Context: docker-desktop
+Kubernetes control plane: Running
+
+2. DEPLOYMENT
+StatefulSet: mongo
+Replicas: 3
+MongoDB image: mongo:7.0
+Headless Service: mongo
+
+3. PERSISTENT STORAGE
+Three PVCs created successfully.
+Storage per PVC: 1Gi
+Storage status: All Bound
+
+4. KEYFILE AUTHENTICATION
+Kubernetes Secret: mongo-keyfile
+InitContainer: setup-keyfile
+Shared keyfile copied and permissions configured.
+Admin user: lab13_admin
+Authentication: SUCCESSFUL
+
+5. REPLICA SET STATUS
+Replica set: rs0
+
+mongo-0.mongo:27017 - PRIMARY   - Health: 1
+mongo-1.mongo:27017 - SECONDARY - Health: 1
+mongo-2.mongo:27017 - SECONDARY - Health: 1
+
+6. POD RECOVERY TEST
+Deleted pod: mongo-2
+Kubernetes automatically recreated mongo-2.
+Recovered pod status: 1/1 Running
+
+7. REPLICA SET REJOIN VERIFICATION
+mongo-2 successfully rejoined as SECONDARY.
+All three members healthy.
+
+8. FINAL RESULT
+Kubernetes StatefulSet deployment successful.
+Persistent storage verified.
+Replica set initialization successful.
+Authentication configured.
+Automatic pod recovery and replica set rejoining verified.
+
+LAB 13.2 COMPLETED SUCCESSFULLY.
