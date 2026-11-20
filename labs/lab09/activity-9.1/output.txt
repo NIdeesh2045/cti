@@ -1,0 +1,26 @@
+LAB 9.1 - MEASURE WRITE CONCERN LATENCY
+
+Documents inserted per write concern: 1000
+
+Results:
+Write Concern       Successful   Errors   Total Time   Average Latency
+w:1                 1000         0        0.864 sec    0.864 ms
+w:majority          1000         0        1.390 sec    1.390 ms
+w:3                 1000         0        0.910 sec    0.910 ms
+
+Observations:
+1. w:1 had the lowest measured latency.
+2. w:majority had the highest measured latency.
+3. w:3 was faster than w:majority in this particular run.
+4. All 3000 insert operations succeeded without errors.
+
+Conclusion:
+Write concern affects write acknowledgment latency.
+Higher acknowledgment requirements can increase latency.
+Actual results depend on network conditions, replication,
+server load, and execution timing.
+
+Note:
+w:3 represents acknowledgment from all three data-bearing
+replica set members. MongoDB does not support w:"all"
+as a literal built-in write concern.

@@ -1,0 +1,37 @@
+LAB 9.2 - SIMULATE A NETWORK PARTITION
+
+Replica Set: rs0
+Docker Network: lab08_default
+Members: mongo1, mongo2, mongo3
+
+Experiment 1: Disconnect mongo1
+- mongo1 became unreachable.
+- mongo2 remained PRIMARY.
+- mongo3 remained SECONDARY.
+- w:1 insert: SUCCESS
+- w:majority insert: SUCCESS
+
+Experiment 2: Disconnect mongo3
+- Only mongo2 remained connected.
+- MongoDB lost voting majority.
+- mongo2 stepped down and became SECONDARY.
+- w:1 write attempt: FAILED - not primary.
+- w:majority was not executed because the shell command stopped after the first error.
+
+Experiment 3: Recovery
+- Reconnected mongo3.
+- mongo2 became PRIMARY again.
+- Reconnected mongo1.
+- All three data-bearing members became healthy.
+
+Final Status:
+- mongo1: SECONDARY, health 1
+- mongo2: PRIMARY, health 1
+- mongo3: SECONDARY, health 1
+- arbiter: ARBITER, health 1
+
+Conclusion:
+A replica set requires a voting majority to maintain its primary.
+Without a majority, the primary steps down and cannot accept writes.
+After network connectivity was restored, the replica set recovered.
+The original four-member Lab 08 configuration was restored.

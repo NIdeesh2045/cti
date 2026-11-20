@@ -1,0 +1,25 @@
+LAB 9.1 - TRY IT YOURSELF: JOURNALING COMPARISON
+
+Documents per combination: 1000
+
+Write Concern    Journal    Success    Errors    Total Time    Average
+w:1              true       1000       0         0.867 sec     0.867 ms
+w:1              false      1000       0         0.447 sec     0.447 ms
+w:majority       true       1000       0         1.153 sec     1.153 ms
+w:majority       false      1000       0       101.983 sec   101.983 ms
+w:3              true       1000       0         1.129 sec     1.129 ms
+w:3              false      1000       0         0.883 sec     0.883 ms
+
+Observations:
+1. w:1 with j:false had the lowest measured latency.
+2. w:1 with j:true took longer than j:false.
+3. w:majority with j:false showed unusually high latency.
+4. w:3 results were relatively close between the two journal settings.
+5. All 6000 insert operations succeeded without errors.
+
+Conclusion:
+Journaling can affect write acknowledgment latency.
+The impact varies with write concern and system conditions.
+The unusually high majority result should be repeated
+before attributing it solely to journaling.
+
