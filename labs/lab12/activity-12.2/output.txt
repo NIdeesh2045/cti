@@ -1,0 +1,80 @@
+EXPERIMENT 12.2: TLS / ENCRYPTION-IN-TRANSIT
+============================================
+
+1. CERTIFICATE GENERATION
+-------------------------
+CA certificate: ca.crt
+CA private key: ca.key
+Server certificate: server.crt
+Server private key: server.key
+Server combined PEM: server.pem
+Client certificate: client.crt
+Client private key: client.key
+Client combined PEM: client.pem
+
+Result: SUCCESS
+Server and client certificates signed by the generated CA.
+
+2. MONGODB TLS CONFIGURATION
+----------------------------
+MongoDB version: 7.0.45
+TLS mode: requireTLS
+Port: 27017 (container)
+Host port: 27221
+
+MongoDB startup log:
+Listening on 0.0.0.0
+Waiting for connections
+ssl: on
+mongod startup complete
+
+Result: SUCCESS
+
+3. UNENCRYPTED CONNECTION TEST
+------------------------------
+Attempt: Connect without TLS.
+
+Result: REJECTED AS EXPECTED
+
+Error:
+MongoServerSelectionError:
+connection <monitor> to 127.0.0.1:27017 closed
+
+4. SECURE MONGOSH CONNECTION
+----------------------------
+TLS enabled: Yes
+CA certificate: /certs/ca.crt
+Client certificate: /certs/client.pem
+Authentication user: app_user_read
+
+Result: SUCCESS
+
+Retrieved records:
+{ name: 'Alice', department: 'IT' }
+{ name: 'Bob', department: 'HR' }
+{ name: 'Charlie', department: 'Finance' }
+
+5. PYTHON PYMONGO TLS TEST
+--------------------------
+PyMongo version: 4.18.2
+
+MongoDB connection:
+{'ok': 1.0}
+
+Employee records:
+{'name': 'Alice', 'department': 'IT'}
+{'name': 'Bob', 'department': 'HR'}
+{'name': 'Charlie', 'department': 'Finance'}
+
+TLS verification successful!
+
+6. FINAL RESULT
+---------------
+Certificate generation: PASSED
+TLS configuration: PASSED
+Unencrypted connection rejection: PASSED
+Secure mongosh connection: PASSED
+PyMongo TLS connection: PASSED
+Data retrieval over TLS: PASSED
+
+OVERALL: LAB 12.2 SUCCESSFUL

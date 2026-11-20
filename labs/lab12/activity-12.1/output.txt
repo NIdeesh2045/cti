@@ -1,0 +1,61 @@
+EXPERIMENT 12.1: MONGODB AUTHENTICATION AND RBAC
+================================================
+
+1. ADMIN AUTHENTICATION
+-----------------------
+User: lab12_admin
+Authentication database: admin
+Role: root
+Result: SUCCESS
+
+2. FIELD-LEVEL REDACTION
+------------------------
+View: employee_public
+
+Output:
+{ name: 'Alice', department: 'IT' }
+{ name: 'Bob', department: 'HR' }
+{ name: 'Charlie', department: 'Finance' }
+
+Salary field successfully hidden.
+
+3. READ USER TEST
+-----------------
+User: app_user_read
+
+Operation: db.employee_public.find()
+Result: SUCCESS
+
+Operation: db.employees.find()
+Result: FAILED AS EXPECTED
+
+Error: Unauthorized
+Reason: Read user cannot access the original employees collection.
+
+4. WRITE USER TEST
+------------------
+User: app_user_write
+
+Operation: Insert document into reports
+Result: SUCCESS
+Acknowledged: true
+
+Operation: db.reports.find()
+Result: SUCCESS
+
+Operation: db.employees.find()
+Result: FAILED AS EXPECTED
+
+Error: Unauthorized
+Reason: Write user has permissions only on the reports collection.
+
+5. FINAL RESULT
+---------------
+Authentication: PASSED
+Role-based access control: PASSED
+Read permissions: PASSED
+Write permissions: PASSED
+Unauthorized access prevention: PASSED
+Field-level redaction: PASSED
+
+OVERALL: LAB 12.1 SUCCESSFUL

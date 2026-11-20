@@ -1,0 +1,25 @@
+services:
+  lab12-mongodb:
+    image: mongo:7.0
+    container_name: lab12-mongodb
+    command:
+      - mongod
+      - --auth
+      - --bind_ip_all
+      - --port
+      - "27017"
+      - --tlsMode
+      - requireTLS
+      - --tlsCertificateKeyFile
+      - /certs/server.pem
+      - --tlsCAFile
+      - /certs/ca.crt
+    ports:
+      - "27221:27017"
+    volumes:
+      - lab12_data:/data/db
+      - ./activity-12.2/certs:/certs:ro
+    restart: unless-stopped
+
+volumes:
+  lab12_data:
