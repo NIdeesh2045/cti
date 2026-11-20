@@ -1,0 +1,46 @@
+{
+    "activity": "2.1 - Try It Yourself",
+    "executed_at": "2026-11-20T16:22:18.692908+00:00",
+    "results": [
+        {
+            "server": "Docker MongoDB",
+            "connected": true,
+            "details": {
+                "version": "7.0.45",
+                "gitVersion": "a52313e13ab55c9bddf7c3ff91dab286fa381796",
+                "platform": "Not provided by server",
+                "bits": 64,
+                "allocator": "tcmalloc",
+                "javascriptEngine": "mozjs",
+                "maxBsonObjectSize": 16777216,
+                "storageEngines": [
+                    "devnull",
+                    "wiredTiger"
+                ],
+                "modules": []
+            }
+        },
+        {
+            "server": "MongoDB Atlas",
+            "connected": true,
+            "details": {
+                "version": "8.0.39",
+                "gitVersion": "77eeeb9b44748caea1f0fb2f6c9095dcd8817fc0",
+                "platform": "Not provided by server",
+                "bits": 64,
+                "allocator": "tcmalloc-google",
+                "javascriptEngine": "mozjs",
+                "maxBsonObjectSize": 16777216,
+                "storageEngines": [
+                    "devnull",
+                    "inMemory",
+                    "queryable_wt",
+                    "wiredTiger"
+                ],
+                "modules": [
+                    "enterprise"
+                ]
+            }
+        }
+    ]
+}

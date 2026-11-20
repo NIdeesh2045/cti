@@ -1,0 +1,36 @@
+=======================================================
+ACTIVITY 2.2 - BOOKSTORE PRICE UPDATE
+=======================================================
+
+[OK] Connected to Docker MongoDB
+
+=== CREATE: Inserting Books ===
+[OK] Inserted 5 books
+
+=== BEFORE UPDATE ===
+Clean Code                               Year: 2008 Price: $39.99
+Deep Learning                            Year: 2016 Price: $72.00
+Designing Data-Intensive Applications    Year: 2017 Price: $45.99
+The Pragmatic Programmer                 Year: 2019 Price: $49.99
+Hands-On Machine Learning                Year: 2022 Price: $59.99
+
+=== UPDATE: 10% Increase for Books Before 2010 ===
+[OK] Matched documents: 1
+[OK] Modified documents: 1
+
+=== AFTER UPDATE ===
+Clean Code                               Year: 2008 Price: $43.99
+Deep Learning                            Year: 2016 Price: $72.00
+Designing Data-Intensive Applications    Year: 2017 Price: $45.99
+The Pragmatic Programmer                 Year: 2019 Price: $49.99
+Hands-On Machine Learning                Year: 2022 Price: $59.99
+
+=== VERIFICATION ===
+Books published before 2010: 1
+Books published from 2010 onward: 4
+
+[OK] Price update completed successfully.
+Database: lab02_bookstore
+Collection: books
+
+Open MongoDB Compass to verify the collection.

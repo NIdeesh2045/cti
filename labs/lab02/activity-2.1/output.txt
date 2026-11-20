@@ -1,0 +1,25 @@
+==================================================
+MONGODB SERVER VERSION COMPARISON
+==================================================
+
+Docker MongoDB
+-----------------------------------
+Version: 7.0.45
+Git Version: a52313e13ab55c9bddf7c3ff91dab286fa381796
+Connection: Successful
+
+MongoDB Atlas
+-----------------------------------
+Version: 8.0.39
+Git Version: 77eeeb9b44748caea1f0fb2f6c9095dcd8817fc0
+Connection: Successful
+
+==================================================
+COMPARISON SUMMARY
+==================================================
+Docker MongoDB: 7.0.45
+MongoDB Atlas: 8.0.39
+
+The MongoDB server versions are different.
+
+Results saved to activity-2.1/mongodb_info.json

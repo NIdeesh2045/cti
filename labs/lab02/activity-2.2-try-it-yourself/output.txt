@@ -1,0 +1,29 @@
+=======================================================
+ACTIVITY 2.2 - TRY IT YOURSELF
+Machine Learning Books: 5% Price Increase
+=======================================================
+
+[OK] Connected to Docker MongoDB
+[OK] Inserted 5 books
+
+=== BEFORE UPDATE ===
+The Pragmatic Programmer                 $49.99
+Designing Data-Intensive Applications    $45.99
+Deep Learning                            $72.00
+Clean Code                               $39.99
+Hands-On Machine Learning                $59.99
+
+=== UPDATE: 5% INCREASE ===
+Matched: 2
+Modified: 2
+
+=== AFTER UPDATE ===
+The Pragmatic Programmer                 $49.99
+Designing Data-Intensive Applications    $45.99
+Deep Learning                            $75.60
+Clean Code                               $39.99
+Hands-On Machine Learning                $62.99
+
+[OK] Try It Yourself completed successfully.
+Database: lab02_bookstore
+Collection: books_extra
