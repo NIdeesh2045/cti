@@ -1,0 +1,29 @@
+[OK] Connected to MongoDB
+[OK] Inserted 5 posts
+[OK] Inserted 10 comments
+
+=== REFERENCED DESIGN ($lookup) ===
+Post: Introduction to MongoDB
+Comments: 2
+
+Referenced design using separate queries:
+Post: Introduction to MongoDB
+Comments: 2
+
+=== MIGRATING TO EMBEDDED DESIGN ===
+[OK] Migrated posts and comments into posts_embedded
+
+=== EMBEDDED DESIGN ===
+Post: Introduction to MongoDB
+Comments: 2
+
+=== QUERY COUNT COMPARISON ===
+Referenced with separate find queries: 2 queries
+Referenced with $lookup aggregation: 1 query
+Embedded design with find_one(): 1 query
+
+=== DESIGN COMPARISON ===
+Referenced: Better for large or independently managed comments.
+Embedded: Convenient when comments are limited and read with posts.
+
+[OK] Lab 3.2 completed

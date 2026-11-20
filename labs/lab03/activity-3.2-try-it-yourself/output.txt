@@ -1,0 +1,19 @@
+=== 10,000 COMMENTS DESIGN ANALYSIS ===
+Total comments: 10000
+Estimated document size: 1295.65 KB
+MongoDB BSON document limit: 16.0 MB
+
+=== WHY EMBEDDING IS PROBLEMATIC ===
+1. Document can grow excessively large.
+2. MongoDB has a 16 MB document size limit.
+3. Updating a large comments array can be expensive.
+4. Pagination and independent comment queries become harder.
+5. Concurrent updates to the same post document can create contention.
+
+=== ALTERNATIVE DESIGN ===
+Use a separate comments collection with post_id references.
+Create an index on post_id.
+Retrieve comments in pages using skip/limit or range-based pagination.
+Keep post data separate from the large comments collection.
+
+[OK] Try It Yourself completed

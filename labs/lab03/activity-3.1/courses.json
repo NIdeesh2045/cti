@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Introduction to Machine Learning",
+    "code": "CS401",
+    "instructor": "Dr. Priya Sharma",
+    "schedule": {
+      "days": ["Monday", "Wednesday"],
+      "time": "10:00-11:30",
+      "room": "LH-201"
+    },
+    "students": [
+      {"name": "Arjun Mehta", "id": "ST001", "grade": "A"},
+      {"name": "Sneha Reddy", "id": "ST002", "grade": "B+"}
+    ]
+  },
+  {
+    "title": "Database Management Systems",
+    "code": "CS402",
+    "instructor": "Dr. Anil Gupta",
+    "schedule": {
+      "days": ["Tuesday", "Thursday"],
+      "time": "12:00-13:30",
+      "room": "LH-305"
+    },
+    "students": [
+      {"name": "Rahul Kumar", "id": "ST003", "grade": "A"},
+      {"name": "Kavya Nair", "id": "ST004", "grade": "A-"}
+    ]
+  },
+  {
+    "title": "Natural Language Processing",
+    "code": "CS403",
+    "instructor": "Dr. Priya Sharma",
+    "schedule": {
+      "days": ["Monday", "Friday"],
+      "time": "14:00-15:30",
+      "room": "LH-102"
+    },
+    "students": [
+      {"name": "Neha Gupta", "id": "ST005", "grade": "A"},
+      {"name": "Vikram Singh", "id": "ST006", "grade": "B"}
+    ]
+  }
+]

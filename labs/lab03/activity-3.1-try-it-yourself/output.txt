@@ -1,0 +1,25 @@
+[OK] Connected to MongoDB
+[OK] Inserted 4 courses
+
+=== Course Prerequisites ===
+
+CS101 - Python Programming
+  No prerequisites
+
+CS201 - Data Structures
+  Requires: CS101 - Python Programming
+
+CS301 - Database Management Systems
+  Requires: CS201 - Data Structures
+
+CS401 - Machine Learning
+  Requires: CS201 - Data Structures
+  Requires: CS301 - Database Management Systems
+
+=== Design Justification ===
+Prerequisites are stored as references using course codes.
+Multiple courses can share the same prerequisite.
+Changes to a prerequisite course do not require updating
+every course that depends on it.
+
+[OK] Try It Yourself completed

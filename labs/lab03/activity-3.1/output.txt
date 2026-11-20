@@ -1,0 +1,21 @@
+[OK] Connected to MongoDB
+[OK] Inserted 3 courses
+
+=== Courses meeting on Monday ===
+CS401 - Introduction to Machine Learning
+  Time: 10:00-11:30
+  Room: LH-201
+CS403 - Natural Language Processing
+  Time: 14:00-15:30
+  Room: LH-102
+
+=== Students taught by Dr. Priya Sharma ===
+Arjun Mehta (ST001) - Introduction to Machine Learning - Grade: A
+Sneha Reddy (ST002) - Introduction to Machine Learning - Grade: B+
+Neha Gupta (ST005) - Natural Language Processing - Grade: A
+Vikram Singh (ST006) - Natural Language Processing - Grade: B
+
+=== Schema validation test ===
+[OK] MongoDB rejected the invalid document
+
+[OK] Lab 3.1 completed
