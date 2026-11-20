@@ -1,0 +1,6 @@
+=== Products matching 'wireless' ===
+A | Wireless Headphones | Price: 45
+G | Wireless Mouse | Price: 22
+
+Total matching products: 2
+[OK] Regex search completed

@@ -1,0 +1,12 @@
+=== FIRST IMPORT ===
+Matched: 4
+Modified: 1
+Upserted: 0
+
+=== SECOND IMPORT (SAME DATA) ===
+Matched: 4
+Modified: 0
+Upserted: 0
+
+Total products in collection: 13
+[OK] Idempotent bulk import completed

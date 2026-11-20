@@ -1,0 +1,50 @@
+[OK] Connected to MongoDB
+[OK] Inserted 10 products
+
+=== COMPARISON: Price between 20 and 50 ===
+A | Wireless Headphones | Price: 45 | Stock: 20
+B | Bluetooth Speaker | Price: 35 | Stock: 0
+D | USB Keyboard | Price: 25 | Stock: 30
+G | Wireless Mouse | Price: 22 | Stock: 50
+
+=== COMPARISON: Out of stock ===
+B | Bluetooth Speaker | Price: 35 | Stock: 0
+E | Smart Watch | Price: 150 | Stock: 0
+J | USB Cable | Price: 10 | Stock: 0
+
+=== LOGICAL: Out of stock OR price above 100 ===
+B | Bluetooth Speaker | Price: 35 | Stock: 0
+C | Gaming Laptop | Price: 1200 | Stock: 15
+E | Smart Watch | Price: 150 | Stock: 0
+F | Office Chair | Price: 180 | Stock: 12
+I | Monitor | Price: 250 | Stock: 8
+J | USB Cable | Price: 10 | Stock: 0
+
+=== LOGICAL: In stock AND premium ===
+A | Wireless Headphones | Price: 45 | Stock: 20
+C | Gaming Laptop | Price: 1200 | Stock: 15
+I | Monitor | Price: 250 | Stock: 8
+
+=== ARRAY: Both electronics AND wireless ===
+A | Wireless Headphones | Price: 45 | Stock: 20
+B | Bluetooth Speaker | Price: 35 | Stock: 0
+E | Smart Watch | Price: 150 | Stock: 0
+G | Wireless Mouse | Price: 22 | Stock: 50
+
+=== ARRAY: Exactly 2 tags ===
+B | Bluetooth Speaker | Price: 35 | Stock: 0
+C | Gaming Laptop | Price: 1200 | Stock: 15
+D | USB Keyboard | Price: 25 | Stock: 30
+F | Office Chair | Price: 180 | Stock: 12
+G | Wireless Mouse | Price: 22 | Stock: 50
+H | Phone Case | Price: 15 | Stock: 100
+J | USB Cable | Price: 10 | Stock: 0
+
+=== PAGINATION: Page 1 (3 products) ===
+
+=== Sorted alphabetically ===
+B | Bluetooth Speaker | Price: 35 | Stock: 0
+C | Gaming Laptop | Price: 1200 | Stock: 15
+I | Monitor | Price: 250 | Stock: 8
+
+[OK] Lab 4.1 completed

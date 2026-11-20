@@ -1,0 +1,22 @@
+[OK] Connected to MongoDB
+
+=== UPSERT OPERATIONS ===
+[UNCHANGED] SKU A already has price 49.99
+[UNCHANGED] SKU K already has price 75.0
+
+Total products: 13
+
+=== BULK WRITE OPERATIONS ===
+Matched documents: 5
+Modified documents: 3
+Upserted documents: 0
+
+=== VERIFICATION ===
+A | Wireless Headphones | Stock: 40 | Active: True
+B | Bluetooth Speaker | Stock: 20 | Active: True
+C | Gaming Laptop | Stock: 35 | Active: True
+D | USB Keyboard | Stock: 30 | Active: False
+E | Smart Watch | Stock: 0 | Active: False
+K | Product K | Stock: 10 | Active: True
+
+[OK] Lab 4.2 completed
