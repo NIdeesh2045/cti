@@ -1,0 +1,167 @@
+=================================================================
+MONGODB LAB 07.2 - WORKING SET ANALYSIS
+=================================================================
+Downloading annual security reports catalog...
+Report catalog entries found: 502
+
+Database: lab07_working_set
+Collection: security_reports_working_set
+Target documents: 100,000
+Inserted: 2,000/100,000
+Inserted: 4,000/100,000
+Inserted: 6,000/100,000
+Inserted: 8,000/100,000
+Inserted: 10,000/100,000
+Inserted: 12,000/100,000
+Inserted: 14,000/100,000
+Inserted: 16,000/100,000
+Inserted: 18,000/100,000
+Inserted: 20,000/100,000
+Inserted: 22,000/100,000
+Inserted: 24,000/100,000
+Inserted: 26,000/100,000
+Inserted: 28,000/100,000
+Inserted: 30,000/100,000
+Inserted: 32,000/100,000
+Inserted: 34,000/100,000
+Inserted: 36,000/100,000
+Inserted: 38,000/100,000
+Inserted: 40,000/100,000
+Inserted: 42,000/100,000
+Inserted: 44,000/100,000
+Inserted: 46,000/100,000
+Inserted: 48,000/100,000
+Inserted: 50,000/100,000
+Inserted: 52,000/100,000
+Inserted: 54,000/100,000
+Inserted: 56,000/100,000
+Inserted: 58,000/100,000
+Inserted: 60,000/100,000
+Inserted: 62,000/100,000
+Inserted: 64,000/100,000
+Inserted: 66,000/100,000
+Inserted: 68,000/100,000
+Inserted: 70,000/100,000
+Inserted: 72,000/100,000
+Inserted: 74,000/100,000
+Inserted: 76,000/100,000
+Inserted: 78,000/100,000
+Inserted: 80,000/100,000
+Inserted: 82,000/100,000
+Inserted: 84,000/100,000
+Inserted: 86,000/100,000
+Inserted: 88,000/100,000
+Inserted: 90,000/100,000
+Inserted: 92,000/100,000
+Inserted: 94,000/100,000
+Inserted: 96,000/100,000
+Inserted: 98,000/100,000
+Inserted: 100,000/100,000
+
+=================================================================
+DATASET CREATION RESULTS
+=================================================================
+Documents: 100,000
+Average BSON size: 2,486.56 bytes
+Minimum BSON size: 2,289 bytes
+Maximum BSON size: 2,700 bytes
+Total BSON size: 237.14 MB
+Insertion time: 3.32 seconds
+
+Dataset source:
+https://github.com/jacobdjwilson/awesome-annual-security-reports/
+
+Working-set dataset created successfully.
+=================================================================
+MONGODB LAB 07.2 - WIREDTIGER CACHE ANALYSIS
+=================================================================
+
+Database: lab07_working_set
+Collection: security_reports_working_set
+Documents: 100,000
+Collection storage size: 42.98 MB
+Logical data size: 237.14 MB
+
+INITIAL WIREDTIGER CACHE
+------------------------------------------------------------
+Cache currently used: 479.47 MB
+Maximum cache configured: 3455.00 MB
+Cache occupancy: 13.88%
+Pages requested: 1,954,075
+Pages read into cache: 641
+Approximate counter-based hit ratio: 99.97%
+
+Starting random reads across the collection...
+
+ROUND 1
+------------------------------------------------------------
+Random reads: 10,000
+Read time: 1.844 seconds
+Reads per second: 5,423.93
+Cache occupancy: 13.93%
+Pages requested: 1,974,085
+Pages read into cache: 700
+Approximate counter-based hit ratio: 99.96%
+
+ROUND 2
+------------------------------------------------------------
+Random reads: 10,000
+Read time: 1.920 seconds
+Reads per second: 5,209.47
+Cache occupancy: 13.93%
+Pages requested: 1,994,085
+Pages read into cache: 700
+Approximate counter-based hit ratio: 99.96%
+
+ROUND 3
+------------------------------------------------------------
+Random reads: 10,000
+Read time: 1.999 seconds
+Reads per second: 5,003.59
+Cache occupancy: 13.93%
+Pages requested: 2,014,088
+Pages read into cache: 702
+Approximate counter-based hit ratio: 99.97%
+
+ROUND 4
+------------------------------------------------------------
+Random reads: 10,000
+Read time: 1.968 seconds
+Reads per second: 5,080.34
+Cache occupancy: 7.75%
+Pages requested: 2,037,728
+Pages read into cache: 702
+Approximate counter-based hit ratio: 99.97%
+
+ROUND 5
+------------------------------------------------------------
+Random reads: 10,000
+Read time: 2.043 seconds
+Reads per second: 4,895.63
+Cache occupancy: 7.75%
+Pages requested: 2,057,728
+Pages read into cache: 702
+Approximate counter-based hit ratio: 99.97%
+
+=================================================================
+FINAL CACHE ANALYSIS
+=================================================================
+
+FINAL WIREDTIGER CACHE
+------------------------------------------------------------
+Cache currently used: 267.87 MB
+Maximum cache configured: 3455.00 MB
+Cache occupancy: 7.75%
+Pages requested: 2,057,728
+Pages read into cache: 702
+Approximate counter-based hit ratio: 99.97%
+
+INTERPRETATION:
+- Cache occupancy shows how much of the configured cache is used.
+- Pages read into cache indicates disk/page reads into WiredTiger.
+- Repeated random reads may benefit from pages already cached.
+- Cache occupancy is not the same as the percentage of the
+  complete collection held in memory.
+- The displayed counter-based hit ratio is an approximation,
+  not an exact per-query cache hit measurement.
+

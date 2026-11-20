@@ -1,0 +1,53 @@
+=================================================================
+LAB 7.1 - TRY IT YOURSELF
+EMBEDDING VS REFERENCING
+=================================================================
+
+Embedded IOC documents: 68835
+
+=================================================================
+QUERY PERFORMANCE COMPARISON
+=================================================================
+
+Referencing with $lookup:
+Matching documents: 44330
+Execution time: 1.030113 seconds
+
+Embedding source details:
+Matching documents: 44330
+Execution time: 0.123589 seconds
+
+=================================================================
+DESIGN ANALYSIS
+=================================================================
+
+EMBEDDING ADVANTAGES:
+1. Source details are available directly in the IOC document.
+2. No $lookup operation is needed.
+3. Source-based IOC queries become simpler.
+4. Source information is available in one read.
+
+EMBEDDING DISADVANTAGES:
+1. Source information is duplicated across IOC documents.
+2. Updating a source requires updating many IOC documents.
+3. Storage usage increases.
+4. Data consistency becomes harder to maintain.
+
+REFERENCING ADVANTAGES:
+1. Source information is stored only once.
+2. Updating a source is easier.
+3. Less duplication.
+4. Better for sources shared by many IOCs.
+
+REFERENCING DISADVANTAGES:
+1. Related source information requires $lookup.
+2. Queries become more complex.
+3. Joining collections can add query overhead.
+
+CONCLUSION:
+Embedding is useful when source details are frequently read
+with IOC records and change infrequently.
+
+Referencing is preferable when source records are shared,
+frequently updated, or need independent management.
+

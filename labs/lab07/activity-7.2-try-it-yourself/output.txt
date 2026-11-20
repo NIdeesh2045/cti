@@ -1,0 +1,56 @@
+======================================================================
+LAB 7.2 - WIREDTIGER CACHE & NEW REPORT MONITOR
+======================================================================
+Monitoring interval: 10 seconds
+Press Ctrl+C to stop.
+
+======================================================================
+MONITORING CYCLE: 1
+UTC time: 2026-11-20T17:29:37.428723+00:00
+New reports discovered: 0
+Current source catalog entries: 502
+
+WIREDTIGER CACHE
+--------------------------------------------------
+Cache used: 264.68 MB
+Cache configured: 3455.00 MB
+Cache occupancy: 7.66%
+Pages requested: 1,710,159
+Pages read into cache: 581
+Approximate cache hit ratio: 99.97%
+
+Next check in 10 seconds...
+
+======================================================================
+MONITORING CYCLE: 2
+UTC time: 2026-11-20T17:29:47.678871+00:00
+New reports discovered: 0
+Current source catalog entries: 502
+
+WIREDTIGER CACHE
+--------------------------------------------------
+Cache used: 264.68 MB
+Cache configured: 3455.00 MB
+Cache occupancy: 7.66%
+Pages requested: 1,712,009
+Pages read into cache: 581
+Approximate cache hit ratio: 99.97%
+
+Next check in 10 seconds...
+
+======================================================================
+MONITORING CYCLE: 3
+UTC time: 2026-11-20T17:29:58.123332+00:00
+New reports discovered: 0
+Current source catalog entries: 502
+
+WIREDTIGER CACHE
+--------------------------------------------------
+Cache used: 264.68 MB
+Cache configured: 3455.00 MB
+Cache occupancy: 7.66%
+Pages requested: 1,713,859
+Pages read into cache: 581
+Approximate cache hit ratio: 99.97%
+
+Next check in 10 seconds...

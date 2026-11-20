@@ -1,0 +1,61 @@
+=================================================================
+MONGODB LAB 07.1 - PRODUCTION SCHEMA ANALYSIS
+=================================================================
+
+Downloading: https://ctidigest.com/articles.json
+Downloaded records: 23,874
+
+Downloading: https://ctidigest.com/iocs.json
+Downloaded records: 68,835
+
+Unique sources created: 37
+
+=================================================================
+BSON DOCUMENT SIZE ANALYSIS
+=================================================================
+
+Collection: articles
+Documents: 23,874
+Average BSON size: 553.77 bytes
+Maximum BSON size: 814 bytes
+Minimum BSON size: 303 bytes
+Average size: 0.54 KB
+Maximum size: 0.79 KB
+16 MB limit usage: 0.004852%
+Status: SAFE - below 16 MB limit
+
+Collection: iocs
+Documents: 68,835
+Average BSON size: 252.10 bytes
+Maximum BSON size: 365 bytes
+Minimum BSON size: 243 bytes
+Average size: 0.25 KB
+Maximum size: 0.36 KB
+16 MB limit usage: 0.002176%
+Status: SAFE - below 16 MB limit
+
+Collection: sources
+Documents: 37
+Average BSON size: 94.05 bytes
+Maximum BSON size: 105 bytes
+Minimum BSON size: 84 bytes
+Average size: 0.09 KB
+Maximum size: 0.10 KB
+16 MB limit usage: 0.000626%
+Status: SAFE - below 16 MB limit
+
+=================================================================
+DATABASE SUMMARY
+=================================================================
+Database: lab07_cti_schema
+Sources: 37
+Articles: 23874
+IOCs: 68835
+
+Collections:
+- iocs_embedded_source
+- iocs
+- articles
+- sources
+
+Lab 07.1 dataset created successfully.
