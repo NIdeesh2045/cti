@@ -1,0 +1,26 @@
+LAB 8.1 - DEPLOY A LOCAL REPLICA SET
+
+Replica Set Name: rs0
+MongoDB Version: 7.0
+Nodes:
+- lab08-mongo1:27017
+- lab08-mongo2:27017
+- lab08-mongo3:27017
+
+Initial Replica Set Status:
+- mongo1: PRIMARY
+- mongo2: SECONDARY
+- mongo3: SECONDARY
+- All three nodes healthy (health: 1).
+
+Test Document:
+Database: lab08_replication
+Collection: replication_test
+Message: MongoDB replica set replication test
+
+Replication Verification:
+- Document inserted successfully on the primary.
+- Same document and _id verified on mongo2.
+- Same document and _id verified on mongo3.
+
+Result: Successful. Data replicated to both secondary nodes.

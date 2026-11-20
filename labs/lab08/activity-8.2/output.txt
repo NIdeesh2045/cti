@@ -1,0 +1,167 @@
+=================================================================
+LAB 8.2 - REPLICA SET FAILOVER MONITOR
+=================================================================
+Monitoring interval: 2 seconds
+Press Ctrl+C to stop.
+
+
+*** PRIMARY CHANGE DETECTED: lab08-mongo2:27017 ***
+
+[2026-11-20T18:08:27.344682+00:00] Cycle 1
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:29.357801+00:00] Cycle 2
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:31.368934+00:00] Cycle 3
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:33.381611+00:00] Cycle 4
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:35.389893+00:00] Cycle 5
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:37.396515+00:00] Cycle 6
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:39.405049+00:00] Cycle 7
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:41.412846+00:00] Cycle 8
+Connected member: lab08-mongo2:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+
+*** PRIMARY CHANGE DETECTED: lab08-mongo1:27017 ***
+
+[2026-11-20T18:08:43.420407+00:00] Cycle 9
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:45.424157+00:00] Cycle 10
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:47.433990+00:00] Cycle 11
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:49.442731+00:00] Cycle 12
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:51.455347+00:00] Cycle 13
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:53.463649+00:00] Cycle 14
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:55.471793+00:00] Cycle 15
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:57.480814+00:00] Cycle 16
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:08:59.488407+00:00] Cycle 17
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:01.505303+00:00] Cycle 18
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:03.515038+00:00] Cycle 19
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:05.522517+00:00] Cycle 20
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:07.532717+00:00] Cycle 21
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:09.541887+00:00] Cycle 22
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:11.548636+00:00] Cycle 23
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:13.558508+00:00] Cycle 24
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:15.564043+00:00] Cycle 25
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:17.573051+00:00] Cycle 26
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:19.581471+00:00] Cycle 27
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:21.590545+00:00] Cycle 28
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:23.597845+00:00] Cycle 29
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:25.606133+00:00] Cycle 30
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------
+[2026-11-20T18:09:27.613045+00:00] Cycle 31
+Connected member: lab08-mongo1:27017
+Role: PRIMARY
+Read successful: True
+-----------------------------------------------------------------

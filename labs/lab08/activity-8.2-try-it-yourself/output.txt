@@ -1,0 +1,27 @@
+LAB 8.2 - TRY IT YOURSELF: PRIORITY-BASED ELECTION
+
+Initial Configuration:
+All three data-bearing members had priority 1.
+
+Updated Priorities:
+- mongo1: 1
+- mongo2: 3
+- mongo3: 2
+- arbiter: 0
+
+Prediction:
+mongo2 was expected to become PRIMARY because it had the highest priority.
+
+Verified Replica Set Status:
+- mongo1: SECONDARY
+- mongo2: PRIMARY
+- mongo3: SECONDARY
+- arbiter: ARBITER
+
+Election Term: 4
+All members healthy (health: 1).
+
+Observation:
+The election result matched the prediction. The highest-priority eligible data-bearing member, mongo2, became PRIMARY.
+
+Result: Priority configuration and election verified successfully.

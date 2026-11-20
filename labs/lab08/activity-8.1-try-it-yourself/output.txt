@@ -1,0 +1,24 @@
+LAB 8.1 - TRY IT YOURSELF: ADD AN ARBITER
+
+Replica Set: rs0
+
+Arbiter Added:
+- Host: lab08-arbiter:27017
+- Role: ARBITER
+- Health: 1
+
+Final Replica Set Members:
+- mongo1: PRIMARY
+- mongo2: SECONDARY
+- mongo3: SECONDARY
+- arbiter: ARBITER
+
+Voting Configuration:
+- Total voting members: 4
+- Majority required: 3
+- Writable voting members: 3
+
+Observation:
+The arbiter participates in elections by casting a vote but does not store application data. It helps maintain election quorum without requiring storage for a full data-bearing replica.
+
+Result: Arbiter added successfully and verified using rs.status().
