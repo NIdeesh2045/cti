@@ -1,0 +1,24 @@
+=================================================================
+LAB 6.2 - TRY IT YOURSELF: COVERED QUERY
+=================================================================
+
+[1] Creating compound index
+Created: category_name_covered_idx
+
+[2] Executing covered query
+Execution stages: PROJECTION_COVERED -> IXSCAN
+Documents examined: 0
+Keys examined: 4043
+Documents returned: 4043
+
+[3] Sample covered query results
+{'category': 'Electronics', 'name': 'Product Model 10'}
+{'category': 'Electronics', 'name': 'Product Model 10002'}
+{'category': 'Electronics', 'name': 'Product Model 10007'}
+{'category': 'Electronics', 'name': 'Product Model 10013'}
+{'category': 'Electronics', 'name': 'Product Model 10019'}
+
+SUCCESS: Covered query verified.
+FETCH stage eliminated.
+
+Lab 6.2 covered query completed.

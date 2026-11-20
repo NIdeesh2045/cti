@@ -1,0 +1,138 @@
+=================================================================
+LAB 6.1 - INDEX DESIGN FOR A QUERY WORKLOAD
+=================================================================
+
+[1] Generating 50,000 product documents...
+Inserted 1,000/50,000 documents
+Inserted 2,000/50,000 documents
+Inserted 3,000/50,000 documents
+Inserted 4,000/50,000 documents
+Inserted 5,000/50,000 documents
+Inserted 6,000/50,000 documents
+Inserted 7,000/50,000 documents
+Inserted 8,000/50,000 documents
+Inserted 9,000/50,000 documents
+Inserted 10,000/50,000 documents
+Inserted 11,000/50,000 documents
+Inserted 12,000/50,000 documents
+Inserted 13,000/50,000 documents
+Inserted 14,000/50,000 documents
+Inserted 15,000/50,000 documents
+Inserted 16,000/50,000 documents
+Inserted 17,000/50,000 documents
+Inserted 18,000/50,000 documents
+Inserted 19,000/50,000 documents
+Inserted 20,000/50,000 documents
+Inserted 21,000/50,000 documents
+Inserted 22,000/50,000 documents
+Inserted 23,000/50,000 documents
+Inserted 24,000/50,000 documents
+Inserted 25,000/50,000 documents
+Inserted 26,000/50,000 documents
+Inserted 27,000/50,000 documents
+Inserted 28,000/50,000 documents
+Inserted 29,000/50,000 documents
+Inserted 30,000/50,000 documents
+Inserted 31,000/50,000 documents
+Inserted 32,000/50,000 documents
+Inserted 33,000/50,000 documents
+Inserted 34,000/50,000 documents
+Inserted 35,000/50,000 documents
+Inserted 36,000/50,000 documents
+Inserted 37,000/50,000 documents
+Inserted 38,000/50,000 documents
+Inserted 39,000/50,000 documents
+Inserted 40,000/50,000 documents
+Inserted 41,000/50,000 documents
+Inserted 42,000/50,000 documents
+Inserted 43,000/50,000 documents
+Inserted 44,000/50,000 documents
+Inserted 45,000/50,000 documents
+Inserted 46,000/50,000 documents
+Inserted 47,000/50,000 documents
+Inserted 48,000/50,000 documents
+Inserted 49,000/50,000 documents
+Inserted 50,000/50,000 documents
+Dataset generation completed: 50,000 products
+
+Total documents: 50000
+Existing indexes: ['_id_']
+
+[2 - QUERY EXECUTION BEFORE INDEXES]
+
+Q1 - Category filter, sorted by price
+Execution stages: SORT -> COLLSCAN
+Total documents examined: 50000
+Total keys examined: 0
+Documents returned: 6248
+
+Q2 - Price range
+Execution stages: COLLSCAN
+Total documents examined: 50000
+Total keys examined: 0
+Documents returned: 9907
+
+Q3 - Search by tag
+Execution stages: COLLSCAN
+Total documents examined: 50000
+Total keys examined: 0
+Documents returned: 12457
+
+Q4 - Text search on product name
+Could not execute before indexing: text index required for $text query, full error: {'ok': 0.0, 'errmsg': 'text index required for $text query', 'code': 27, 'codeName': 'IndexNotFound'}
+Reason: MongoDB $text requires a text index.
+
+Q5 - Rating filter, sorted by stock
+Execution stages: SORT -> COLLSCAN
+Total documents examined: 50000
+Total keys examined: 0
+Documents returned: 8427
+
+[3] Creating indexes for the five query patterns...
+Created index: category_price_idx
+Created index: price_idx
+Created index: tags_idx
+Created index: name_text_idx
+Created index: rating_stock_idx
+
+[4 - QUERY EXECUTION AFTER INDEXES]
+
+Q1 - Category filter, sorted by price
+Execution stages: FETCH -> IXSCAN
+Total documents examined: 6248
+Total keys examined: 6248
+Documents returned: 6248
+
+Q2 - Price range
+Execution stages: FETCH -> IXSCAN
+Total documents examined: 9907
+Total keys examined: 9907
+Documents returned: 9907
+
+Q3 - Search by tag
+Execution stages: FETCH -> IXSCAN
+Total documents examined: 12457
+Total keys examined: 12457
+Documents returned: 12457
+
+Q4 - Text search on product name
+Execution stages: TEXT_MATCH -> FETCH -> OR -> IXSCAN -> IXSCAN
+Total documents examined: 8225
+Total keys examined: 8639
+Documents returned: 8225
+
+Q5 - Rating filter, sorted by stock
+Execution stages: FETCH -> IXSCAN
+Total documents examined: 8427
+Total keys examined: 8427
+Documents returned: 8427
+
+[5] Index information
+_id_ : [('_id', 1)]
+category_price_idx : [('category', 1), ('price', 1)]
+price_idx : [('price', 1)]
+tags_idx : [('tags', 1)]
+name_text_idx : [('_fts', 'text'), ('_ftsx', 1)]
+rating_stock_idx : [('rating', 1), ('stock', -1)]
+
+Lab 6.1 completed successfully.

@@ -1,0 +1,48 @@
+=================================================================
+LAB 6.1 - TRY IT YOURSELF: INDEX USAGE STATISTICS
+=================================================================
+
+[1] Running representative queries repeatedly...
+Query workload iteration 1/5 completed
+Query workload iteration 2/5 completed
+Query workload iteration 3/5 completed
+Query workload iteration 4/5 completed
+Query workload iteration 5/5 completed
+
+[2] Collecting index usage statistics...
+
+Index: price_idx
+Operations: 5
+Since: 2026-11-20 17:07:16.095000
+Host: 20131c83a905:27017
+
+Index: category_price_idx
+Operations: 5
+Since: 2026-11-20 17:07:16.043000
+Host: 20131c83a905:27017
+
+Index: name_text_idx
+Operations: 5
+Since: 2026-11-20 17:07:16.230000
+Host: 20131c83a905:27017
+
+Index: rating_stock_idx
+Operations: 5
+Since: 2026-11-20 17:07:16.380000
+Host: 20131c83a905:27017
+
+Index: tags_idx
+Operations: 5
+Since: 2026-11-20 17:07:16.136000
+Host: 20131c83a905:27017
+
+Index: _id_
+Operations: 0
+Since: 2026-11-20 17:07:15.638000
+Host: 20131c83a905:27017
+
+[3] Index usage analysis
+Most frequently used index: price_idx
+Operations: 5
+
+Lab 6.1 index usage analysis completed.

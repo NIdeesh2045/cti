@@ -1,0 +1,94 @@
+=================================================================
+LAB 6.2 - COMPARE INDEX STRATEGIES
+=================================================================
+
+[1] Insertion benchmark WITHOUT additional indexes
+Without indexes
+Inserted documents: 10,000
+Insertion time: 0.0522 seconds
+
+[2] Creating five indexes
+Created index: category_price_idx
+Created index: price_idx
+Created index: rating_idx
+Created index: stock_idx
+Created index: tags_idx
+
+[3] Insertion benchmark WITH five indexes
+With five indexes
+Inserted documents: 10,000
+Insertion time: 0.0831 seconds
+
+[4] Insertion Performance Comparison
+Without indexes: 0.0522 seconds
+With five indexes: 0.0831 seconds
+Percentage slowdown: 59.19%
+
+[5] Query performance WITH five indexes
+
+Q1 - Category and price sort
+Documents examined: 4043
+Keys examined: 4043
+Documents returned: 4043
+
+Q2 - Price range
+Documents examined: 3964
+Keys examined: 3964
+Documents returned: 3964
+
+Q3 - Rating filter
+Documents examined: 3948
+Keys examined: 3948
+Documents returned: 3948
+
+Q4 - Stock filter
+Documents examined: 16061
+Keys examined: 16061
+Documents returned: 16061
+
+Q5 - Tag search
+Documents examined: 9929
+Keys examined: 9929
+Documents returned: 9929
+
+[6] Dropping all but the critical compound index
+Dropped: price_idx
+Dropped: rating_idx
+Dropped: stock_idx
+Dropped: tags_idx
+
+[7] Query performance WITH only category_price_idx
+
+Q1 - Category and price sort
+Documents examined: 4043
+Keys examined: 4043
+Documents returned: 4043
+
+Q2 - Price range
+Documents examined: 20000
+Keys examined: 0
+Documents returned: 3964
+
+Q3 - Rating filter
+Documents examined: 20000
+Keys examined: 0
+Documents returned: 3948
+
+Q4 - Stock filter
+Documents examined: 20000
+Keys examined: 0
+Documents returned: 16061
+
+Q5 - Tag search
+Documents examined: 20000
+Keys examined: 0
+Documents returned: 9929
+
+[8] Final index configuration
+_id_ : [('_id', 1)]
+category_price_idx : [('category', 1), ('price', 1)]
+
+Analysis:
+Indexes can improve read queries by reducing document scans. However, every additional index requires storage and maintenance during inserts, updates, and deletes. A smaller index set reduces write overhead but may cause some queries to use collection scans.
+
+Lab 6.2 completed successfully.
