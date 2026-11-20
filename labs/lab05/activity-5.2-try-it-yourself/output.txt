@@ -1,0 +1,16 @@
+MongoDB connection successful.
+Inserted 7 products.
+Inserted 10 orders.
+
+============================================================
+PRODUCTS WITH ORDERS HAVING QUANTITY >= 2
+============================================================
+{'category': 'Audio', 'product_name': 'Headphones', 'orders_with_quantity_2_or_more': []}
+{'category': 'Accessories', 'product_name': 'Keyboard', 'orders_with_quantity_2_or_more': [{'customer': 'Alice', 'quantity': 2, 'order_date': '2026-03-02'}]}
+{'category': 'Electronics', 'product_name': 'Laptop', 'orders_with_quantity_2_or_more': []}
+{'category': 'Electronics', 'product_name': 'Monitor', 'orders_with_quantity_2_or_more': [{'customer': 'Alice', 'quantity': 2, 'order_date': '2026-01-20'}]}
+{'category': 'Accessories', 'product_name': 'Mouse', 'orders_with_quantity_2_or_more': [{'customer': 'Bob', 'quantity': 2, 'order_date': '2026-01-08'}, {'customer': 'Emma', 'quantity': 3, 'order_date': '2026-02-14'}]}
+{'category': 'Electronics', 'product_name': 'Printer', 'orders_with_quantity_2_or_more': []}
+{'category': 'Accessories', 'product_name': 'Webcam', 'orders_with_quantity_2_or_more': []}
+
+Filtered $lookup pipeline completed successfully.

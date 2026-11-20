@@ -1,0 +1,10 @@
+MongoDB connection successful.
+Inserted 24 orders.
+
+=======================================================
+ORDER VALUE CATEGORIZATION USING $BUCKET
+=======================================================
+{'number_of_orders': 10, 'total_revenue': 6540, 'orders': [{'customer': 'Alice', 'product': 'Laptop', 'order_value': 850}, {'customer': 'Alice', 'product': 'Monitor', 'order_value': 360}, {'customer': 'Bob', 'product': 'Laptop', 'order_value': 900}, {'customer': 'David', 'product': 'Laptop', 'order_value': 950}, {'customer': 'Emma', 'product': 'Headphones', 'order_value': 220}, {'customer': 'Alice', 'product': 'Laptop', 'order_value': 880}, {'customer': 'Emma', 'product': 'Monitor', 'order_value': 380}, {'customer': 'Charlie', 'product': 'Laptop', 'order_value': 920}, {'customer': 'David', 'product': 'Monitor', 'order_value': 210}, {'customer': 'Bob', 'product': 'Laptop', 'order_value': 870}], 'category': 'Large (over $200)'}
+{'number_of_orders': 14, 'total_revenue': 1633, 'orders': [{'customer': 'Bob', 'product': 'Mouse', 'order_value': 50}, {'customer': 'Charlie', 'product': 'Keyboard', 'order_value': 75}, {'customer': 'David', 'product': 'Headphones', 'order_value': 120}, {'customer': 'Emma', 'product': 'Mouse', 'order_value': 60}, {'customer': 'Charlie', 'product': 'Monitor', 'order_value': 200}, {'customer': 'Alice', 'product': 'Keyboard', 'order_value': 130}, {'customer': 'Bob', 'product': 'Monitor', 'order_value': 175}, {'customer': 'Charlie', 'product': 'Mouse', 'order_value': 88}, {'customer': 'David', 'product': 'Keyboard', 'order_value': 80}, {'customer': 'Bob', 'product': 'Headphones', 'order_value': 130}, {'customer': 'Alice', 'product': 'Mouse', 'order_value': 75}, {'customer': 'Emma', 'product': 'Keyboard', 'order_value': 140}, {'customer': 'Charlie', 'product': 'Headphones', 'order_value': 115}, {'customer': 'Alice', 'product': 'Monitor', 'order_value': 195}], 'category': 'Medium ($50-$200)'}
+
+Bucket analysis completed successfully.

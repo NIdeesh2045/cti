@@ -1,0 +1,9 @@
+[
+  {"_id": 1, "name": "Laptop", "category": "Electronics", "base_price": 850},
+  {"_id": 2, "name": "Mouse", "category": "Accessories", "base_price": 25},
+  {"_id": 3, "name": "Keyboard", "category": "Accessories", "base_price": 75},
+  {"_id": 4, "name": "Monitor", "category": "Electronics", "base_price": 180},
+  {"_id": 5, "name": "Headphones", "category": "Audio", "base_price": 120},
+  {"_id": 6, "name": "Webcam", "category": "Accessories", "base_price": 65},
+  {"_id": 7, "name": "Printer", "category": "Electronics", "base_price": 250}
+]

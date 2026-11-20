@@ -1,0 +1,25 @@
+MongoDB connection successful.
+Inserted 7 products.
+Inserted 10 orders.
+
+=======================================================
+1. ORDERS JOINED WITH PRODUCT DETAILS
+=======================================================
+{'quantity': 1, 'order_date': '2026-01-05', 'product_name': 'Laptop', 'total': 850}
+{'quantity': 2, 'order_date': '2026-01-08', 'product_name': 'Mouse', 'total': 50}
+{'quantity': 1, 'order_date': '2026-01-15', 'product_name': 'Keyboard', 'total': 75}
+{'quantity': 2, 'order_date': '2026-01-20', 'product_name': 'Monitor', 'total': 360}
+{'quantity': 1, 'order_date': '2026-02-03', 'product_name': 'Headphones', 'total': 120}
+{'quantity': 1, 'order_date': '2026-02-10', 'product_name': 'Laptop', 'total': 850}
+{'quantity': 3, 'order_date': '2026-02-14', 'product_name': 'Mouse', 'total': 75}
+{'quantity': 1, 'order_date': '2026-02-22', 'product_name': 'Monitor', 'total': 180}
+{'quantity': 2, 'order_date': '2026-03-02', 'product_name': 'Keyboard', 'total': 150}
+{'quantity': 1, 'order_date': '2026-03-07', 'product_name': 'Headphones', 'total': 120}
+
+=======================================================
+2. PRODUCTS THAT HAVE NEVER BEEN ORDERED
+=======================================================
+{'name': 'Printer', 'category': 'Electronics', 'base_price': 250}
+{'name': 'Webcam', 'category': 'Accessories', 'base_price': 65}
+
+$lookup join analysis completed successfully.

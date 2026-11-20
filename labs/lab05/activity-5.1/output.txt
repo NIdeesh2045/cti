@@ -1,0 +1,32 @@
+MongoDB connection successful.
+
+Inserted 24 orders.
+Database: lab05_sales
+Collection: orders
+
+=======================================================
+1. MONTHLY REVENUE
+=======================================================
+{'total_revenue': 1335, 'total_orders': 4, 'month': '2026-01'}
+{'total_revenue': 1280, 'total_orders': 4, 'month': '2026-02'}
+{'total_revenue': 1475, 'total_orders': 4, 'month': '2026-03'}
+{'total_revenue': 1428, 'total_orders': 4, 'month': '2026-04'}
+{'total_revenue': 1335, 'total_orders': 4, 'month': '2026-05'}
+{'total_revenue': 1320, 'total_orders': 4, 'month': '2026-06'}
+
+=======================================================
+2. TOP 3 CUSTOMERS BY TOTAL SPENDING
+=======================================================
+{'total_spending': 2490, 'products_bought': ['Laptop', 'Mouse', 'Keyboard', 'Monitor'], 'customer': 'Alice'}
+{'total_spending': 2125, 'products_bought': ['Laptop', 'Headphones', 'Mouse', 'Monitor'], 'customer': 'Bob'}
+{'total_spending': 1398, 'products_bought': ['Headphones', 'Mouse', 'Monitor', 'Keyboard', 'Laptop'], 'customer': 'Charlie'}
+
+=======================================================
+3. AVERAGE ORDER VALUE BY STATUS
+=======================================================
+{'order_count': 2, 'status': 'cancelled', 'average_order_value': 70.0}
+{'order_count': 15, 'status': 'completed', 'average_order_value': 410.87}
+{'order_count': 3, 'status': 'pending', 'average_order_value': 123.33}
+{'order_count': 4, 'status': 'shipped', 'average_order_value': 375.0}
+
+Sales analytics pipeline completed successfully.
