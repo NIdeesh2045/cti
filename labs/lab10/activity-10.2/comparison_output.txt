@@ -1,0 +1,34 @@
+Lab 10.2: Transaction vs Non-Transactional Comparison
+
+TRANSACTIONAL APPROACH
+
+Threads | Successful | Failed | Throughput
+1       | 5          | 3      | 40.72 orders/sec
+4       | 5          | 3      | 44.48 orders/sec
+8       | 5          | 3      | 15.92 orders/sec
+16      | 5          | 3      | 3.22 orders/sec
+
+NON-TRANSACTIONAL APPROACH (find_one_and_update)
+
+Threads | Successful | Failed | Throughput
+1       | 5          | 3      | 317.91 orders/sec
+4       | 5          | 3      | 446.10 orders/sec
+8       | 5          | 3      | 472.88 orders/sec
+16      | 5          | 3      | 619.04 orders/sec
+
+OBSERVATION
+
+The non-transactional approach achieved higher throughput
+in this experiment because it avoided transaction overhead.
+
+Both approaches maintained the correct stock count in these
+tests. However, the non-transactional approach updates stock
+and creates an order as separate operations. If order creation
+fails after stock is decremented, the data can become inconsistent.
+
+CONCLUSION
+
+Transactions provide stronger consistency and atomicity.
+The find_one_and_update approach is faster for this simple
+reservation test but does not provide atomicity across both
+inventory and order documents.

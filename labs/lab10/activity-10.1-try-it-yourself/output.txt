@@ -1,0 +1,30 @@
+LAB 10.1 - TRY IT YOURSELF: EXPONENTIAL BACKOFF
+
+Retry Configuration:
+Maximum attempts: 5
+Initial delay: 0.1 seconds
+Backoff formula: 0.1 * (2 ** attempt)
+
+Test:
+Transfer amount: 1000
+Source: ACC001
+Destination: ACC002
+
+Observed Result:
+Transfer successful on attempt 1.
+
+Final Balances:
+ACC001: 4000
+ACC002: 3000
+
+Transaction History:
+One successful transaction recorded.
+
+Observation:
+The transaction completed without a transient transaction error.
+Therefore, no retry was necessary. The retry logic is configured
+to catch TransientTransactionError and use exponential backoff.
+
+Conclusion:
+The successful transaction path was verified.
+The retry path was not triggered during this run.

@@ -1,0 +1,49 @@
+Lab 10.2: Inventory Reservation with Deadlock Handling
+
+Initial stock: 5
+Total requests: 8
+Retry limit: 5
+
+Concurrency Test Results:
+
+Threads: 1
+Successful reservations: 5
+Failed reservations: 3
+Remaining stock: 0
+Orders created: 5
+Elapsed time: 0.1228 seconds
+Throughput: 40.72 orders/second
+
+Threads: 4
+Successful reservations: 5
+Failed reservations: 3
+Remaining stock: 0
+Orders created: 5
+Elapsed time: 0.1124 seconds
+Throughput: 44.48 orders/second
+
+Threads: 8
+Successful reservations: 5
+Failed reservations: 3
+Remaining stock: 0
+Orders created: 5
+Elapsed time: 0.3141 seconds
+Throughput: 15.92 orders/second
+
+Threads: 16
+Successful reservations: 5
+Failed reservations: 3
+Remaining stock: 0
+Orders created: 5
+Elapsed time: 1.5508 seconds
+Throughput: 3.22 orders/second
+
+Observation:
+All concurrency tests created exactly five successful orders.
+Three requests failed because inventory was exhausted.
+No overselling occurred. Throughput decreased at higher
+concurrency levels during this run.
+
+Conclusion:
+The transaction successfully maintained inventory consistency
+while multiple threads attempted reservations.
