@@ -1,0 +1,297 @@
+AB 18 - COMPARATIVE DATABASE IMPLEMENTATION AND ANALYSIS
+
+PROJECT OVERVIEW
+
+Lab18 compares MongoDB, Apache Cassandra, and Neo4j for a synthetic
+threat-intelligence workload. Lab18 is divided into two activities:
+
+-   Lab18.1: Database implementation, data loading, performance
+    benchmarking, and graph-based campaign analysis.
+-   Lab18.2: Comparative analysis, architecture, scalability,
+    operations, and final database recommendation.
+
+IMPORTANT DATA NOTE
+
+The dataset is fully synthetic. It contains no verified real-world
+threat intelligence. Campaign relationships are generated for
+demonstration and must not be interpreted as confirmed real attacks or
+false positives.
+
+DATASET
+
+Total records: 100,000 Sources: 16 Threat types: 7 Severity levels: 3
+Unique campaigns: 10,000 Records per campaign: 10 Dataset files: -
+data/threats_100k.jsonl - data/threats_100k.csv
+
+LAB 18.1 - IMPLEMENTATION AND PERFORMANCE
+
+1. DATABASE IMPLEMENTATION
+
+MongoDB - Database: lab18_threats - Collections: full_threats and
+threats - Imported and verified threat records: 100,000 - Dashboard
+recent-threat records: 50 - Additional benchmark indexes were
+checked/prepared.
+
+Cassandra - Keyspace: lab18 - Main tables: threats_by_source and
+threats_by_type - Verified records in each main table: 100,000 -
+Additional table: threats_by_target - Verified target records: 100,000 -
+Daily aggregate table: daily_threat_volume - Daily aggregate rows: 695
+
+Neo4j - Lab18-specific labels: Lab18Threat, Lab18Source, Lab18Campaign -
+Threat nodes: 100,000 - Source nodes: 16 - Campaign nodes: 10,000 -
+Relationships: 200,000 - Relationships connect each threat to its source
+and campaign.
+
+Lab18 uses isolated database/keyspace/label namespaces. The existing CTI
+platform data and other lab namespaces were not intentionally modified.
+
+2. QUERY PERFORMANCE
+
+Configuration: - 100,000 synthetic threat records - 10 repetitions per
+query - Metric: median execution time - Lower execution time is faster
+for the tested query.
+
+Query MongoDB Cassandra Neo4j
+
+Threat history 0.454 ms 2.023 ms 15.139 ms Target analysis 0.451 ms
+1.866 ms 28.889 ms Daily threat volume 58.088 ms 4.316 ms 67.996 ms
+
+Findings: - MongoDB was fastest for threat-history retrieval. - MongoDB
+was fastest for target analysis. - Cassandra was fastest for daily
+threat volume because the daily totals were pre-aggregated in a
+dedicated table. - Neo4j’s measured query times were higher for these
+specific implementations. Its main benefit in this lab is representing
+and traversing relationships.
+
+3. INSERT THROUGHPUT
+
+Median throughput from 10 runs, with 1,000 benchmark records attempted
+per run:
+
+Database Median throughput
+
+MongoDB 242,739.95 records/second Cassandra 23,648.29 records/second
+Neo4j 60,957.13 records/second
+
+The implementations used different write methods: - MongoDB: bulk
+insert. - Cassandra: asynchronous prepared individual inserts, waiting
+for writes. - Neo4j: UNWIND with CREATE in a transaction.
+
+These results compare the implemented workflows on the local test
+environment. They are not a perfectly controlled comparison of
+database-engine limits. Warm-up effects, local hardware, driver
+behavior, write settings, and measurement boundaries can affect results.
+
+4. GRAPH-BASED CAMPAIGN ANALYSIS
+
+Graph statistics: - Threat nodes: 100,000 - Source nodes: 16 - Campaign
+nodes: 10,000 - Cross-source campaigns returned by the analysis query:
+100 - MongoDB threat records cross-referenced: 1,000
+
+Top source pairs reported: - Curated sample + Unit 42: 2,214 shared
+campaigns - Securelist (Kaspersky) + Unit 42: 2,210 shared campaigns -
+Synthetic Threat Feed + Unit 42: 2,209 shared campaigns - Dark Reading +
+Microsoft Security Blog: 2,207 shared campaigns - Microsoft Security
+Blog + Rapid7 Blog: 2,203 shared campaigns
+
+The graph query used LIMIT 100. Therefore, 100 is the number returned by
+the analysis query, not necessarily the total number of cross-source
+campaigns.
+
+Shared synthetic campaign membership indicates a potential relationship.
+It does not prove that a threat is a false positive or a confirmed
+real-world relationship. The MongoDB cross-reference retrieved matching
+records for the selected campaigns.
+
+5. LAB 18.1 CONCLUSION
+
+MongoDB performed best for the two tested retrieval queries and had the
+highest measured insert throughput in this implementation. Cassandra
+performed best for daily-volume analytics. Neo4j provided a graph
+representation of threats, sources, and campaigns for relationship
+analysis.
+
+No single database is best for every workload. The choice depends on the
+application’s access patterns, scale, operational requirements, and need
+for relationship traversal.
+
+LAB 18.2 - COMPARATIVE ANALYSIS
+
+1. SYSTEM ARCHITECTURE
+
+The common synthetic dataset is loaded into three separate database
+systems:
+
+Synthetic Threat Dataset (100,000 records) | Data Ingestion | +———+———+
+| | | v v v MongoDB Cassandra Neo4j | | | full_threats threats_
+Lab18Threat dashboard by_source Lab18Source by_type Lab18Campaign
+by_target daily_volume | | | +———+———+ | Comparative Analysis |
+Performance and Graph Findings | Database Recommendation
+
+2. DATA MODEL COMPARISON
+
+MongoDB - Model: document-oriented. - Stores threat records as flexible
+documents. - Lab18 collections: full_threats and threats. - Strengths:
+flexible schema, application integration, filtering and aggregation, and
+convenient operational threat storage. - Limitations: relationship-heavy
+analysis may require aggregation pipelines, denormalization, or
+application-side processing.
+
+Cassandra - Model: wide-column. - Lab18 tables: threats_by_source,
+threats_by_type, threats_by_target, and daily_threat_volume. -
+Strengths: distributed storage, query-driven tables, and horizontal
+scaling. - Limitations: denormalization and additional tables are needed
+for different query patterns; ad-hoc queries are less flexible.
+
+Neo4j - Model: property graph. - Lab18 labels: Lab18Threat, Lab18Source,
+Lab18Campaign. - Relationships: REPORTED_BY and HAS_CAMPAIGN. -
+Strengths: relationship traversal, campaign correlation,
+connected-entity analysis, and graph investigation. - Limitations: graph
+modelling and query planning require specialized knowledge; memory and
+relationship growth must be monitored.
+
+3. SCALABILITY ANALYSIS
+
+The lab directly tested 100,000 records. The following 1M, 10M, and 100M
+scenarios are qualitative projections, not measured results.
+
+Scale MongoDB Cassandra Neo4j
+
+1 million Optimize indexes and Add nodes and tune Tune memory, storage;
+monitor plans. partition design. indexes and queries.
+
+10 million Consider sharding if Expand cluster and Optimize traversals,
+a replica set is not replication. memory and graph shape. sufficient.
+
+100 million Sharded deployment, Larger distributed Evaluate graph
+shard-key planning, cluster, partition segmentation and backups and
+monitoring. sizing and repair. workload isolation.
+
+MongoDB: - Use replica sets for availability. - Introduce sharding when
+data volume or throughput requires it. - Select shard keys based on
+query patterns and write distribution. - Monitor replication lag, chunk
+balance, storage, and slow queries.
+
+Cassandra: - Add nodes to increase cluster capacity. - Use partition
+keys that distribute workload and support query patterns. - Configure
+replication across nodes and, where appropriate, data centers. - Monitor
+compaction, repair, disk space, dropped messages, and latency.
+
+Neo4j: - Optimize graph indexes and traversal queries. - Monitor memory,
+page cache, relationship fan-out, and query depth. - Evaluate clustering
+options for the selected Neo4j edition and deployment. - Consider graph
+segmentation or workload isolation for very large graphs.
+
+4. HARDWARE ESTIMATES
+
+These are starting-point planning estimates for a small lab deployment,
+not measured requirements or production sizing guarantees.
+
+Database CPU RAM Storage
+
+MongoDB 4-8 vCPU 16-32 GB SSD Cassandra 4-8 vCPU per node 16-32 GB per
+node SSD Neo4j 4-8 vCPU 16-32 GB SSD
+
+Actual sizing depends on record size, indexes, retention, query
+concurrency, replication, durability, graph degree, and workload mix. A
+distributed Cassandra test should use multiple nodes; MongoDB
+replica-set and sharding layouts should be sized for the required
+availability; Neo4j deployment options depend on edition and workload.
+
+5. OPERATIONAL COMPLEXITY
+
+MongoDB: - Replica-set administration and optional shard management. -
+Index management, backup and restore. - Monitor replication lag, slow
+queries, disk use, and index utilization. - Skills: document modelling,
+aggregation, indexing, replication, shard keys.
+
+Cassandra: - Cluster health, compaction, repair, consistency, and
+partition management. - Monitor pending compactions, dropped messages,
+repair status, disk, and read/write latency. - Skills: CQL,
+partition/clustering-key design, denormalization, replication, and
+distributed-systems troubleshooting.
+
+Neo4j: - Graph backup, transaction monitoring, index management, memory
+tuning, and cluster administration where applicable. - Monitor heap,
+page cache, query plans, transaction activity, and storage. - Skills:
+Cypher, graph modelling, traversal optimization, and graph analytics.
+
+6. BACKUP AND MONITORING
+
+MongoDB: - Use database-aware backup tools or managed-service backups. -
+Monitor replication lag, query latency, index usage, disk space, and
+slow queries.
+
+Cassandra: - Use snapshots and a tested restore procedure; coordinate
+backups with commit-log and operational procedures. - Monitor node
+health, compaction, repair, disk space, dropped messages, and read/write
+latency.
+
+Neo4j: - Use Neo4j-supported backup and restore procedures for the
+deployed edition. - Monitor transaction activity, page cache, heap,
+storage, query plans, and database availability.
+
+For all systems: - Define retention and recovery objectives. - Test
+restoration, not only backup creation. - Centralize logs and metrics and
+alert on capacity, latency, and failures.
+
+7. FINAL DATABASE RECOMMENDATION
+
+MongoDB - Primary operational threat store: Recommended for flexible
+threat documents, source/target retrieval, application APIs, and the
+retrieval workloads measured in Lab18.1.
+
+Cassandra - Distributed query-driven workloads: Recommended for
+predictable source, type, and time-oriented access patterns and
+distributed storage. It achieved the lowest measured daily-volume query
+time.
+
+Neo4j - Relationship and campaign analysis: Recommended when
+investigations depend on relationships among threats, sources,
+campaigns, and indicators. Its value is graph traversal and correlation.
+
+Overall recommendation: A polyglot persistence architecture is
+appropriate when all three workload types are important and the team can
+operate multiple database systems: - MongoDB: primary operational threat
+database. - Cassandra: query-driven distributed data store. - Neo4j:
+graph-based threat correlation engine.
+
+If only one database can be operated, MongoDB is the most balanced
+choice for the workloads tested in this experiment. Further testing is
+required before making a production deployment decision.
+
+8. LIMITATIONS
+
+-   The dataset and campaign relationships are synthetic.
+-   The experiment tested 100,000 records only; larger scale scenarios
+    are projections, not measured results.
+-   Benchmarks were run in one local environment.
+-   Insert methods differed, so throughput is not a perfectly controlled
+    engine-to-engine comparison.
+-   Cassandra daily volume uses precomputed aggregates, while MongoDB
+    and Neo4j compute the aggregation during the query. The strategies
+    do different work.
+-   Shared synthetic campaign membership is not proof of a real attack
+    or a confirmed false positive.
+
+PROJECT OUTPUT FILES
+
+Dataset: - data/threats_100k.jsonl - data/threats_100k.csv
+
+Lab18.1: - activity-18.1/benchmark_results.json -
+activity-18.1/graph_analysis_results.json -
+activity-18.1/mongodb_setup.py - activity-18.1/cassandra_setup.py -
+activity-18.1/neo4j_setup.py - activity-18.1/import_mongodb.py -
+activity-18.1/import_cassandra.py - activity-18.1/import_neo4j.py -
+activity-18.1/prepare_benchmarks.py - activity-18.1/benchmark.py -
+activity-18.1/graph_analysis.py
+
+Lab18.2: - activity-18.2/diagrams/system_architecture.md -
+activity-18.2/results/query_performance.md -
+activity-18.2/results/insert_throughput.md -
+activity-18.2/results/data_model_comparison.md -
+activity-18.2/results/scalability_analysis.md -
+activity-18.2/results/operations_and_hardware.md -
+activity-18.2/results/final_recommendation.md
+
+END OF LAB 18

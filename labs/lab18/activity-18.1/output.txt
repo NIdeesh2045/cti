@@ -1,0 +1,112 @@
+LAB 18.1 - COMPARATIVE DATABASE IMPLEMENTATION AND PERFORMANCE ANALYSIS
+
+DATASET
+
+Dataset type: Fully synthetic threat-intelligence dataset Total records:
+100,000 Sources: 16 Threat types: 7 Severity levels: 3 Unique campaigns:
+10,000 Records per campaign: 10 All records are synthetic, not real
+threat-feed records.
+
+1. DATABASE SETUP AND DATA IMPORT
+
+MongoDB - Database: lab18_threats - Collections: full_threats, threats -
+Threat records imported and verified: 100,000 - Dashboard recent-threat
+records: 50
+
+Cassandra - Keyspace: lab18 - Main tables: threats_by_source,
+threats_by_type - Verified records in each main table: 100,000 -
+Additional table: threats_by_target - Verified target records: 100,000 -
+Daily aggregate table: daily_threat_volume - Daily aggregate rows: 695
+
+Neo4j - Lab18 labels: Lab18Threat, Lab18Source, Lab18Campaign - Threat
+nodes: 100,000 - Source nodes: 16 - Campaign nodes: 10,000 -
+Relationships: 200,000 - Relationships connect threats to their source
+and campaign.
+
+Lab18 data was kept in separate database, keyspace, and label
+namespaces.
+
+2. QUERY PERFORMANCE BENCHMARKS
+
+Configuration: 10 repetitions per query. Values below are median
+execution times. Lower time indicates faster completion in this test.
+
+Query MongoDB Cassandra Neo4j
+
+Threat history 0.454 ms 2.023 ms 15.139 ms Target analysis 0.451 ms
+1.866 ms 28.889 ms Daily threat volume 58.088 ms 4.316 ms 67.996 ms
+
+Observations: - MongoDB had the lowest measured median for
+threat-history retrieval. - MongoDB had the lowest measured median for
+target analysis. - Cassandra had the lowest measured median for
+daily-volume analytics. - Neo4j query times were higher for these
+particular query implementations.
+
+3. INSERT THROUGHPUT
+
+Each run attempted to insert 1,000 benchmark records. Values are median
+throughput from 10 runs per database.
+
+Database Median throughput
+
+MongoDB 242,739.95 records/second Cassandra 23,648.29 records/second
+Neo4j 60,957.13 records/second
+
+Benchmark limitation: The implementations used different write
+methods: - MongoDB: bulk insert. - Cassandra: asynchronous prepared
+individual inserts, waiting for writes. - Neo4j: UNWIND with CREATE in a
+transaction.
+
+These are observed results for the implemented workflows on this
+machine, not a perfectly controlled comparison of database engines or
+universal performance limits. Warm-up effects and local environment
+conditions may influence results.
+
+4. GRAPH-BASED CAMPAIGN ANALYSIS
+
+Graph statistics: - Threat nodes: 100,000 - Source nodes: 16 - Campaign
+nodes: 10,000 - Cross-source campaigns returned by the query: 100 -
+MongoDB threat records cross-referenced: 1,000
+
+Sample source pairs: - Curated sample + Unit 42: 2,214 shared
+campaigns - Securelist (Kaspersky) + Unit 42: 2,210 shared campaigns -
+Synthetic Threat Feed + Unit 42: 2,209 shared campaigns - Dark Reading +
+Microsoft Security Blog: 2,207 shared campaigns - Microsoft Security
+Blog + Rapid7 Blog: 2,203 shared campaigns
+
+The graph query used LIMIT 100. Therefore, 100 is the number returned
+for this analysis, not necessarily the total number of cross-source
+campaigns in the graph.
+
+Shared synthetic campaign membership indicates a potential relationship
+between records. It does not prove that a threat is a false positive.
+The dataset is synthetic, so the analysis demonstrates the workflow
+rather than real-world threat attribution.
+
+5. OVERALL FINDINGS
+
+-   MongoDB performed best for the two tested retrieval queries and had
+    the highest measured insert throughput in this implementation.
+-   Cassandra performed best for the daily aggregate query and supports
+    query-driven table design.
+-   Neo4j represents relationships among threats, sources, and campaigns
+    directly, making it useful for relationship and community-style
+    analysis.
+-   The best database depends on the workload. These results do not
+    establish one universally best database.
+
+6. OUTPUT FILES
+
+Dataset: - data/threats_100k.jsonl - data/threats_100k.csv
+
+Benchmark results: - activity-18.1/benchmark_results.json
+
+Graph analysis: - activity-18.1/graph_analysis_results.json
+
+Implementation scripts: - activity-18.1/mongodb_setup.py -
+activity-18.1/cassandra_setup.py - activity-18.1/neo4j_setup.py -
+activity-18.1/import_mongodb.py - activity-18.1/import_cassandra.py -
+activity-18.1/import_neo4j.py - activity-18.1/prepare_benchmarks.py -
+activity-18.1/benchmark.py - activity-18.1/graph_analysis.py
+
+END OF LAB 18.1 OUTPUT

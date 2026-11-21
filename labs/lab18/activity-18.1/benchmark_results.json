@@ -1,0 +1,344 @@
+[
+    {
+        "test": "Threat history",
+        "database": "MongoDB",
+        "runs": 10,
+        "median_ms": 0.454,
+        "min_ms": 0.388,
+        "max_ms": 11.874
+    },
+    {
+        "test": "Threat history",
+        "database": "Cassandra",
+        "runs": 10,
+        "median_ms": 2.023,
+        "min_ms": 1.545,
+        "max_ms": 38.314
+    },
+    {
+        "test": "Threat history",
+        "database": "Neo4j",
+        "runs": 10,
+        "median_ms": 15.139,
+        "min_ms": 9.713,
+        "max_ms": 195.35
+    },
+    {
+        "test": "Target analysis",
+        "database": "MongoDB",
+        "runs": 10,
+        "median_ms": 0.451,
+        "min_ms": 0.39,
+        "max_ms": 2.775
+    },
+    {
+        "test": "Target analysis",
+        "database": "Cassandra",
+        "runs": 10,
+        "median_ms": 1.866,
+        "min_ms": 1.16,
+        "max_ms": 3.973
+    },
+    {
+        "test": "Target analysis",
+        "database": "Neo4j",
+        "runs": 10,
+        "median_ms": 28.889,
+        "min_ms": 25.0,
+        "max_ms": 125.059
+    },
+    {
+        "test": "Daily volume",
+        "database": "MongoDB",
+        "runs": 10,
+        "median_ms": 58.088,
+        "min_ms": 55.206,
+        "max_ms": 162.008
+    },
+    {
+        "test": "Daily volume",
+        "database": "Cassandra",
+        "runs": 10,
+        "median_ms": 4.316,
+        "min_ms": 3.66,
+        "max_ms": 9.426
+    },
+    {
+        "test": "Daily volume",
+        "database": "Neo4j",
+        "runs": 10,
+        "median_ms": 67.996,
+        "min_ms": 44.649,
+        "max_ms": 131.411
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 1,
+        "elapsed_seconds": 0.0179,
+        "throughput_records_per_second": 55921.63
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 2,
+        "elapsed_seconds": 0.007,
+        "throughput_records_per_second": 143680.74
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 3,
+        "elapsed_seconds": 0.0039,
+        "throughput_records_per_second": 253215.26
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 4,
+        "elapsed_seconds": 0.0043,
+        "throughput_records_per_second": 232429.76
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 5,
+        "elapsed_seconds": 0.0039,
+        "throughput_records_per_second": 256090.14
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 6,
+        "elapsed_seconds": 0.0049,
+        "throughput_records_per_second": 204758.93
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 7,
+        "elapsed_seconds": 0.0038,
+        "throughput_records_per_second": 260216.22
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 8,
+        "elapsed_seconds": 0.0039,
+        "throughput_records_per_second": 254073.11
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 9,
+        "elapsed_seconds": 0.0042,
+        "throughput_records_per_second": 239626.16
+    },
+    {
+        "test": "Insert throughput",
+        "database": "MongoDB",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 10,
+        "elapsed_seconds": 0.0041,
+        "throughput_records_per_second": 245853.74
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 1,
+        "elapsed_seconds": 0.0513,
+        "throughput_records_per_second": 19489.19
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 2,
+        "elapsed_seconds": 0.0423,
+        "throughput_records_per_second": 23651.82
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 3,
+        "elapsed_seconds": 0.0423,
+        "throughput_records_per_second": 23644.76
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 4,
+        "elapsed_seconds": 0.0422,
+        "throughput_records_per_second": 23714.97
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 5,
+        "elapsed_seconds": 0.0405,
+        "throughput_records_per_second": 24699.97
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 6,
+        "elapsed_seconds": 0.0617,
+        "throughput_records_per_second": 16213.38
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 7,
+        "elapsed_seconds": 0.0423,
+        "throughput_records_per_second": 23635.33
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 8,
+        "elapsed_seconds": 0.0422,
+        "throughput_records_per_second": 23696.73
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 9,
+        "elapsed_seconds": 0.0416,
+        "throughput_records_per_second": 24044.43
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Cassandra",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 10,
+        "elapsed_seconds": 0.0438,
+        "throughput_records_per_second": 22838.07
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 1,
+        "elapsed_seconds": 0.0798,
+        "throughput_records_per_second": 12530.55
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 2,
+        "elapsed_seconds": 0.035,
+        "throughput_records_per_second": 28562.42
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 3,
+        "elapsed_seconds": 0.0489,
+        "throughput_records_per_second": 20470.31
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 4,
+        "elapsed_seconds": 0.0163,
+        "throughput_records_per_second": 61208.56
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 5,
+        "elapsed_seconds": 0.0159,
+        "throughput_records_per_second": 62923.75
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 6,
+        "elapsed_seconds": 0.0157,
+        "throughput_records_per_second": 63526.68
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 7,
+        "elapsed_seconds": 0.0165,
+        "throughput_records_per_second": 60705.7
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 8,
+        "elapsed_seconds": 0.0332,
+        "throughput_records_per_second": 30087.48
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 9,
+        "elapsed_seconds": 0.015,
+        "throughput_records_per_second": 66811.42
+    },
+    {
+        "test": "Insert throughput",
+        "database": "Neo4j",
+        "runs": 1,
+        "batch_size": 1000,
+        "run": 10,
+        "elapsed_seconds": 0.0154,
+        "throughput_records_per_second": 64952.46
+    }
+]
