@@ -1,0 +1,176 @@
+
+============================================================
+LAB 17 - ACTIVITY 17.2
+COMPARISON OF HNSW AND IVF VECTOR INDEXES
+============================================================
+
+OBJECTIVE:
+To compare HNSW and IVF vector indexing techniques based on
+index construction time, query latency and retrieval recall.
+
+------------------------------------------------------------
+1. TECHNOLOGIES USED
+------------------------------------------------------------
+
+Python
+FAISS (Facebook AI Similarity Search)
+Sentence Transformers
+PyTorch
+NumPy
+Pandas
+
+Embedding Model:
+sentence-transformers/all-MiniLM-L6-v2
+
+Embedding Dimensions: 384
+
+------------------------------------------------------------
+2. DATASET GENERATION
+------------------------------------------------------------
+
+A synthetic threat intelligence dataset was generated.
+
+Total Documents: 5,000
+Embedding Dimensions: 384
+Total Test Queries: 100
+Retrieval Size (Top-K): 20
+
+The dataset covered:
+- Phishing attacks
+- Ransomware attacks
+- Malware infections
+- SQL injection
+- Cross-site scripting
+- DDoS attacks
+- Brute force attacks
+- Zero-day vulnerabilities
+- Credential theft
+- Insider threats
+
+All documents were converted into 384-dimensional
+embeddings using the Sentence Transformer model.
+
+------------------------------------------------------------
+3. INDEX CONFIGURATION
+------------------------------------------------------------
+
+HNSW INDEX:
+
+Algorithm: Hierarchical Navigable Small World
+Dimensions: 384
+M: 32
+efConstruction: 200
+efSearch: 64
+Similarity Metric: Inner Product
+
+IVF INDEX:
+
+Algorithm: Inverted File Index
+Dimensions: 384
+Number of Clusters (nlist): 100
+Number of Probes (nprobe): 10
+Similarity Metric: Inner Product
+
+EXACT SEARCH BASELINE:
+
+Index Type: FAISS IndexFlatIP
+Purpose: To calculate exact top-20 nearest neighbours
+for recall measurement.
+
+------------------------------------------------------------
+4. EXPERIMENT METHODOLOGY
+------------------------------------------------------------
+
+1. Generated 5,000 threat intelligence documents.
+2. Converted documents into 384-dimensional embeddings.
+3. Generated 100 test queries.
+4. Created an exact search index as the baseline.
+5. Built the HNSW index and measured construction time.
+6. Built and trained the IVF index and measured
+   construction time.
+7. Executed all 100 queries against both indexes.
+8. Measured average query latency.
+9. Compared retrieved top-20 results against exact
+   search results to calculate Recall@20.
+
+Recall@20 Formula:
+
+Recall@20 =
+(Number of relevant results retrieved in top 20 /
+ Number of exact top-20 results) × 100
+
+------------------------------------------------------------
+5. BENCHMARK RESULTS
+------------------------------------------------------------
+
+Metric                  HNSW          IVF
+------------------------------------------------------------
+Build Time (seconds)    0.3567        0.0109
+Average Latency (ms)    0.0333        0.0212
+Recall@20 (%)           99.80         99.55
+Number of Queries       100           100
+
+Exact Baseline Build Time: 0.0017 seconds
+
+------------------------------------------------------------
+6. RESULT ANALYSIS
+------------------------------------------------------------
+
+HNSW:
+
+- Achieved 99.80% Recall@20.
+- Provided the highest retrieval recall.
+- Required 0.3567 seconds for index construction.
+- Average query latency was 0.0333 ms.
+
+IVF:
+
+- Achieved 99.55% Recall@20.
+- Provided the lowest average query latency.
+- Required 0.0109 seconds for index construction.
+- Used 100 clusters and 10 probes.
+
+OBSERVATIONS:
+
+1. IVF had faster index construction than HNSW.
+2. IVF showed lower average query latency.
+3. HNSW achieved slightly higher retrieval recall.
+4. Both indexes produced high recall values.
+
+------------------------------------------------------------
+7. COMPARISON AND RECOMMENDATION
+------------------------------------------------------------
+
+HNSW is suitable when retrieval accuracy and high recall
+are important.
+
+IVF is suitable when faster index construction and lower
+query latency are priorities.
+
+Based on this experiment, IVF performed better in
+construction time and measured query latency, while
+HNSW achieved the highest Recall@20.
+
+The choice depends on the application's requirements.
+
+------------------------------------------------------------
+8. CONCLUSION
+------------------------------------------------------------
+
+The experiment successfully compared HNSW and IVF vector
+indexes using 5,000 threat intelligence documents and
+100 test queries.
+
+Both indexing techniques achieved high retrieval recall.
+
+IVF demonstrated faster index construction and lower
+average query latency, whereas HNSW achieved slightly
+higher recall.
+
+This experiment demonstrates the trade-off between
+search performance, index construction time and
+retrieval accuracy in vector databases.
+
+============================================================
+END OF ACTIVITY 17.2
+============================================================

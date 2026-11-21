@@ -1,0 +1,197 @@
+
+============================================================
+LAB 17 - ACTIVITY 17.1
+BUILDING A SIMPLE RAG PIPELINE
+============================================================
+
+OBJECTIVE:
+To build a Retrieval-Augmented Generation (RAG) pipeline
+that stores documents, retrieves relevant information using
+vector search, and generates responses using an LLM.
+
+------------------------------------------------------------
+1. TECHNOLOGIES USED
+------------------------------------------------------------
+
+Python: Application development
+MongoDB Atlas: Document and vector storage
+Voyage AI: Text embedding generation
+Atlas Vector Search: Semantic document retrieval
+Ollama: Local LLM execution
+Llama 3.2 (3B): Response generation
+PyMongo: MongoDB connectivity
+
+------------------------------------------------------------
+2. DOCUMENT PROCESSING
+------------------------------------------------------------
+
+Five threat intelligence documents were created:
+
+1. Threat Intelligence
+2. Phishing Attacks
+3. Malware
+4. Ransomware
+5. Network Security
+
+Documents were divided into smaller chunks using a
+simple sliding-window approach.
+
+Total documents: 5
+Total chunks: 5
+
+------------------------------------------------------------
+3. EMBEDDING GENERATION
+------------------------------------------------------------
+
+Embedding Provider: Voyage AI
+Embedding Model: voyage-3
+Embedding Dimensions: 1024
+
+Test Results:
+
+Text 1: MongoDB is a document database.
+Text 2: MongoDB stores data in BSON format.
+
+Cosine Similarity: 0.7444
+
+Status: SUCCESS
+
+------------------------------------------------------------
+4. MONGODB ATLAS STORAGE
+------------------------------------------------------------
+
+Cluster: Cluster0
+Database: rag_demo
+Collection: documents
+
+Stored fields:
+- text
+- source
+- embedding
+- created_at
+
+Total chunks stored: 5
+
+Vector Search Index:
+Name: vector_index
+Vector field: embedding
+Dimensions: 1024
+Similarity: cosine
+
+Index Status: READY
+Documents Indexed: 5/5
+
+------------------------------------------------------------
+5. VECTOR SEARCH RETRIEVAL
+------------------------------------------------------------
+
+Test Query:
+How can organizations protect themselves against ransomware?
+
+Top 3 Retrieved Documents:
+
+1. Ransomware
+   Similarity Score: 0.8667
+
+2. Malware
+   Similarity Score: 0.7456
+
+3. Network Security
+   Similarity Score: 0.6741
+
+The system successfully retrieved the most relevant
+documents based on semantic similarity.
+
+Status: SUCCESS
+
+------------------------------------------------------------
+6. LLM RESPONSE GENERATION
+------------------------------------------------------------
+
+LLM Platform: Ollama
+Model: llama3.2:3b
+Execution: Local machine
+
+The retrieved document chunks were added to a prompt
+and passed to the Ollama language model.
+
+The model generated responses using the retrieved
+threat intelligence information.
+
+Status: SUCCESS
+
+------------------------------------------------------------
+7. CONVERSATION MEMORY
+------------------------------------------------------------
+
+MongoDB Collection: conversations
+
+Stored fields:
+- user_id
+- timestamp
+- role
+- content
+
+Implemented features:
+- Stores user questions.
+- Stores assistant responses.
+- Retrieves the last 5 conversation messages.
+- Includes previous conversation context in new prompts.
+
+Status: SUCCESS
+
+------------------------------------------------------------
+8. COMPLETE RAG PIPELINE
+------------------------------------------------------------
+
+Workflow:
+
+User Question
+     |
+     v
+Voyage AI Embedding Generation
+     |
+     v
+MongoDB Atlas Vector Search
+     |
+     v
+Retrieve Top 3 Relevant Documents
+     |
+     v
+Construct Prompt with Retrieved Context
+     |
+     v
+Ollama - Llama 3.2 (3B)
+     |
+     v
+Generate AI Response
+     |
+     v
+Store Conversation in MongoDB
+
+------------------------------------------------------------
+9. CONCLUSION
+------------------------------------------------------------
+
+The RAG pipeline was successfully implemented using
+MongoDB Atlas, Voyage AI and Ollama.
+
+Documents were divided into chunks and converted into
+1024-dimensional embeddings.
+
+MongoDB Atlas Vector Search retrieved the three most
+relevant document chunks for user queries.
+
+Ollama with the Llama 3.2 (3B) model generated responses
+using the retrieved context.
+
+Conversation memory was implemented using MongoDB to
+maintain the last five messages for multi-turn interactions.
+
+The activity demonstrates how Retrieval-Augmented
+Generation combines semantic search and language models
+to provide context-aware responses.
+
+============================================================
+END OF ACTIVITY 17.1
+============================================================

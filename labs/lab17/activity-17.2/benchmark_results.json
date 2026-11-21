@@ -1,0 +1,16 @@
+[
+    {
+        "Index": "HNSW",
+        "Build Time (seconds)": 0.3567,
+        "Average Latency (ms)": 0.0333,
+        "Recall@20 (%)": 99.8,
+        "Queries": 100
+    },
+    {
+        "Index": "IVF",
+        "Build Time (seconds)": 0.0109,
+        "Average Latency (ms)": 0.0212,
+        "Recall@20 (%)": 99.55,
+        "Queries": 100
+    }
+]

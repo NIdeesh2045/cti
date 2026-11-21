@@ -1,0 +1,3 @@
+Index,Build Time (seconds),Average Latency (ms),Recall@20 (%),Queries
+HNSW,0.3567,0.0333,99.8,100
+IVF,0.0109,0.0212,99.55,100
