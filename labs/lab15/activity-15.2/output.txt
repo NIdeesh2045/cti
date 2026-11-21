@@ -1,0 +1,77 @@
+LAB 15.2 – DATA MIGRATION BETWEEN TENANT ISOLATION STRATEGIES
+EXECUTION OUTPUT
+
+1. DATA SEEDING
+Database: tenant_migration
+
+Total documents inserted: 500
+
+Tenant distribution:
+tenant_a: 100
+tenant_b: 100
+tenant_c: 100
+tenant_d: 100
+tenant_e: 100
+
+2. DATA MIGRATION
+
+Migration strategy: Document-level isolation to collection-per-tenant.
+
+Source collection: tasks
+
+Target collections:
+tasks_tenant_a
+tasks_tenant_b
+tasks_tenant_c
+tasks_tenant_d
+tasks_tenant_e
+
+Migration results:
+tenant_a: 100 documents migrated
+tenant_b: 100 documents migrated
+tenant_c: 100 documents migrated
+tenant_d: 100 documents migrated
+tenant_e: 100 documents migrated
+
+Total migrated: 500
+
+3. MIGRATION VALIDATION
+
+tenant_a: Source=100, Target=100, Leakage=0, PASS
+tenant_b: Source=100, Target=100, Leakage=0, PASS
+tenant_c: Source=100, Target=100, Leakage=0, PASS
+tenant_d: Source=100, Target=100, Leakage=0, PASS
+tenant_e: Source=100, Target=100, Leakage=0, PASS
+
+Final migration result: SUCCESS
+
+4. PERFORMANCE BENCHMARK
+Average execution time over 100 iterations.
+
+Operation                  Document-level    Collection-per-tenant
+Listing 100 tasks           0.6084 ms         0.3759 ms
+Creating a task             2.1632 ms         1.8230 ms
+Cross-tenant analytics      0.4361 ms         1.2915 ms
+
+5. OBSERVATIONS
+
+- Collection-per-tenant performed faster for task listing.
+- Collection-per-tenant performed faster for task creation.
+- Document-level isolation performed faster for cross-tenant analytics.
+
+6. CONCLUSION
+
+The migration of 500 documents across five tenants was
+completed successfully.
+
+All five tenant collections passed validation with zero
+cross-tenant data leakage.
+
+Document-level isolation is suitable for applications
+requiring simpler management and cross-tenant analytics.
+
+Collection-per-tenant is suitable when stronger physical
+separation and tenant-specific collection management are
+required.
+
+LAB 15.2 EXECUTION COMPLETED SUCCESSFULLY.

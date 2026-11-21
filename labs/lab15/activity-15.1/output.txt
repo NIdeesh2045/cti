@@ -1,0 +1,52 @@
+LAB 15.1 – MULTI-TENANT API
+Execution Output
+
+1. DATABASE CONNECTION
+- Successfully connected the FastAPI application to MongoDB.
+- GET /health returned 200 OK.
+- Database status: connected.
+
+2. AUTHENTICATION
+- Seeded users for tenant_a and tenant_b.
+- Successfully authenticated:
+  - Alice – tenant_a (admin)
+  - Bob – tenant_a (user)
+  - Charlie – tenant_b (admin)
+
+3. TASK CREATION AND USER-LEVEL ISOLATION
+- Alice successfully created a task.
+- Logged in as Bob and requested GET /tasks/.
+- Result: 200 OK with an empty list.
+- Bob could not access Alice's task.
+- Bob successfully created his own task.
+- GET /tasks/ returned Bob's own task.
+
+4. CROSS-TENANT ISOLATION
+- Logged in as Charlie (tenant_b admin).
+- Requested GET /tasks/.
+- Result: 200 OK with an empty list.
+- Charlie could not access tasks belonging to tenant_a.
+
+5. ADMIN USER MANAGEMENT
+- Requested GET /admin/users/ as Charlie.
+- Result: Successfully returned only tenant_b users.
+- Charlie – admin – tenant_b
+- David – user – tenant_b
+
+6. TEST RESULTS
+- MongoDB connection: PASSED
+- API health check: PASSED
+- JWT authentication: PASSED
+- Task creation: PASSED
+- User-level isolation: PASSED
+- Cross-tenant isolation: PASSED
+- Tenant-scoped admin access: PASSED
+
+NOTE
+- Regular-user 403 Forbidden test was not performed.
+- Rate-limit threshold test was not performed.
+
+CONCLUSION
+The Multi-Tenant API was implemented successfully.
+JWT authentication, tenant isolation, user-level task
+access, and tenant-scoped admin access were verified.
