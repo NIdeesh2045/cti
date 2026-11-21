@@ -1,0 +1,41 @@
+LAB 14.1 – MONGODB MONITORING DASHBOARD
+========================================
+
+1. MongoDB Connection
+PyMongo connection: Successful
+Replica set: rs0
+
+2. Metrics Collected
+Connection count: 26
+Insert operations: 4
+Query operations: 79
+Update operations: 5
+Delete operations: 5
+
+3. WiredTiger Cache
+Cache hit ratio: 100.00%
+Cache used: Approximately 0.30 MB
+Cache maximum: 3455.00 MB
+
+4. Replica Set Monitoring
+Replica set status: Healthy
+Replication lag: 0.00 seconds
+
+5. Threshold Alerting
+Cache warning threshold: Below 80%
+Replication lag threshold: Above 10 seconds
+Alerts triggered: None
+
+6. Logging
+Output file: metrics.log
+Monitoring interval: 30 seconds
+Two monitoring reports successfully generated.
+
+7. Webhook Extension
+Discord/Slack webhook support implemented.
+Webhook URL configured through MONGODB_WEBHOOK_URL environment variable.
+
+RESULT:
+MongoDB monitoring dashboard executed successfully.
+Metrics collection, table formatting, periodic logging,
+replica set monitoring, and threshold-based alerting verified.

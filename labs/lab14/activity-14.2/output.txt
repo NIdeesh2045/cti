@@ -1,0 +1,29 @@
+
+LAB 14.2 – AUTOMATED BACKUP AND RESTORE VERIFICATION
+
+1. Backup and Restore Verification
+   Documents backed up: 1,000
+   Documents restored: 1,000
+   Original documents verified: 1,000
+   Backup time: 0.07 seconds
+   Restore time: 0.09 seconds
+   Verification status: PASSED
+
+2. Performance Benchmark
+
+   Documents    Backup Time    Restore Time
+   1,000        0.06 sec       0.12 sec
+   10,000       0.07 sec       0.21 sec
+   100,000      0.14 sec       1.08 sec
+
+3. Retention Policy
+   Backup retention period: 7 days
+   Scheduled backup interval: 1 hour
+
+4. Recovery Objectives
+   RPO: 1 hour (hourly backup interval)
+   RTO: Actual restore time + application restart time
+
+5. Result
+   Automated backup, restore verification and performance
+   benchmarking completed successfully.
