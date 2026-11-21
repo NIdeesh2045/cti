@@ -1,0 +1,162 @@
+
+============================================================
+LAB 16 - ACTIVITY 16.2
+BUILDING A HYBRID QUERY SERVICE
+============================================================
+
+OBJECTIVE:
+To develop a Python-based Hybrid Query Service that
+integrates MongoDB, Cassandra, and Neo4j for fraud
+detection using multiple database technologies.
+
+------------------------------------------------------------
+1. TECHNOLOGIES USED
+------------------------------------------------------------
+
+Python: Application development
+MongoDB: Transaction data storage
+Cassandra: User event history
+Neo4j: Fraud network and relationship detection
+PyMongo: MongoDB connectivity
+Cassandra Driver: Cassandra connectivity
+Neo4j Python Driver: Graph database connectivity
+
+------------------------------------------------------------
+2. DATABASE IMPLEMENTATION
+------------------------------------------------------------
+
+MONGODB:
+Database: fraud_detection
+Collection: transactions
+Records inserted: 3
+
+Sample transaction:
+Transaction ID: TXN001
+User ID: U001
+Receiver ID: U002
+Amount: 5000
+Status: completed
+Risk: low
+
+CASSANDRA:
+Keyspace: fraud_detection
+Table: user_profiles
+Records inserted: 5
+
+Stored user events:
+- Login activity
+- Transfer activity
+- Received transactions
+
+NEO4J:
+Nodes: 4 Users
+Relationships: 3 TRANSFERRED_TO
+
+Users:
+U001 - Alice
+U002 - Bob
+U003 - Charlie
+U004 - David
+
+------------------------------------------------------------
+3. FRAUD QUERY SERVICE
+------------------------------------------------------------
+
+Implemented FraudQueryService with the following methods:
+
+1. get_transaction(txn_id)
+   Retrieves transaction information from MongoDB.
+
+2. get_user_profile(user_id)
+   Retrieves user event history from Cassandra.
+
+3. detect_fraud_rings(user_id, max_hops)
+   Detects connected users through Neo4j graph traversal.
+
+4. analyze_fraud(txn_id, user_id)
+   Combines results from all three databases.
+
+------------------------------------------------------------
+4. CONNECTION POOLING AND CIRCUIT BREAKER
+------------------------------------------------------------
+
+Connection pooling:
+- MongoDB maximum pool size: 10
+- Neo4j maximum connection pool size: 10
+- Cassandra cluster connection management.
+
+Circuit breaker:
+- Failure threshold: 3 consecutive failures.
+- Reset timeout: 30 seconds.
+- Prevents repeated calls to an unavailable backend.
+- Allows retry after the reset timeout.
+
+------------------------------------------------------------
+5. INTEGRATION TEST RESULTS
+------------------------------------------------------------
+
+Executed:
+python3 activity-16.2/fraud_service.py
+
+Output:
+
+HYBRID FRAUD ANALYSIS
+
+Transaction:
+TXN001 retrieved successfully.
+
+User events:
+3 retrieved from Cassandra.
+
+Fraud connections:
+3 detected through Neo4j.
+
+Total execution latency:
+278.84 ms
+
+Status: SUCCESS
+
+------------------------------------------------------------
+6. UNIT TEST RESULTS
+------------------------------------------------------------
+
+Executed:
+python3 -m unittest discover -s activity-16.2 -v
+
+Test cases:
+
+1. test_circuit_breaker_failure - PASSED
+2. test_circuit_breaker_recovers - PASSED
+3. test_circuit_breaker_success - PASSED
+
+Total tests: 3
+Passed: 3
+Failed: 0
+
+Status: ALL TESTS PASSED
+
+------------------------------------------------------------
+7. CONCLUSION
+------------------------------------------------------------
+
+The Hybrid Query Service was successfully implemented
+using MongoDB, Cassandra, and Neo4j.
+
+MongoDB retrieves flexible transaction records.
+Cassandra provides time-ordered user event history.
+Neo4j identifies connected users through graph traversal.
+
+The service combines information from all three databases
+to support fraud analysis.
+
+Connection pooling and circuit breaker mechanisms were
+implemented to improve connection management and
+resilience.
+
+The integration test completed successfully with an
+observed latency of 278.84 milliseconds, and all three
+unit tests passed.
+
+============================================================
+END OF ACTIVITY 16.2
+============================================================

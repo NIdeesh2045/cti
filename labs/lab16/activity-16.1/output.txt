@@ -1,0 +1,214 @@
+
+============================================================
+LAB 16 - ACTIVITY 16.1
+MODELING DATA IN THREE DATABASES
+============================================================
+
+Objective:
+To implement the same university course enrollment system
+using MongoDB, Cassandra, and Neo4j, execute equivalent
+queries, and compare their data models and query approaches.
+
+------------------------------------------------------------
+1. MONGODB - DOCUMENT DATABASE
+------------------------------------------------------------
+
+Database: university_mongo
+
+Collections:
+1. students
+2. courses
+
+Records:
+- Students: 4
+- Courses: 3
+
+Data Model:
+Students contain embedded course_ids arrays.
+Courses contain embedded student_ids arrays.
+
+QUERY 1: Find all courses for Alice (S001)
+
+Output:
+C101 - Database Systems
+C102 - Machine Learning
+
+Total Courses: 2
+
+QUERY 2: Find all students in Database Systems (C101)
+
+Output:
+S001 - Alice
+S002 - Bob
+S004 - David
+
+Total Students: 3
+
+QUERY 3: Find students sharing courses with Alice (S001)
+
+Output:
+S002 - Bob
+S003 - Charlie
+S004 - David
+
+Total Students: 3
+
+Status: SUCCESS
+
+------------------------------------------------------------
+2. CASSANDRA - WIDE-COLUMN DATABASE
+------------------------------------------------------------
+
+Keyspace: university
+
+Tables:
+1. student_courses
+2. course_students
+
+Records:
+- student_courses: 9
+- course_students: 9
+
+Data Model:
+Query-driven denormalized tables.
+student_courses is partitioned by student_id.
+course_students is partitioned by course_id.
+
+QUERY 1: Find all courses for Alice (S001)
+
+Output:
+C101 - Database Systems
+C102 - Machine Learning
+
+Total Courses: 2
+
+QUERY 2: Find all students in Database Systems (C101)
+
+Output:
+S001 - Alice
+S002 - Bob
+S004 - David
+
+Total Students: 3
+
+QUERY 3: Find students sharing courses with Alice (S001)
+
+Output:
+S002 - Bob
+S003 - Charlie
+S004 - David
+
+Total Students: 3
+
+Status: SUCCESS
+
+------------------------------------------------------------
+3. NEO4J - GRAPH DATABASE
+------------------------------------------------------------
+
+Database: Neo4j
+
+Nodes:
+- Student: 4
+- Course: 3
+
+Relationships:
+- ENROLLED_IN: 9
+
+Data Model:
+Student and Course are represented as nodes.
+ENROLLED_IN relationships connect students to courses.
+
+QUERY 1: Find all courses for Alice (S001)
+
+Output:
+C102 - Machine Learning
+C101 - Database Systems
+
+Total Courses: 2
+
+QUERY 2: Find all students in Database Systems (C101)
+
+Output:
+S004 - David
+S002 - Bob
+S001 - Alice
+
+Total Students: 3
+
+QUERY 3: Find students sharing courses with Alice (S001)
+
+Output:
+S002 - Bob
+S003 - Charlie
+S004 - David
+
+Total Students: 3
+
+Status: SUCCESS
+
+------------------------------------------------------------
+4. COMPARISON OF DATABASES
+------------------------------------------------------------
+
+Feature             MongoDB       Cassandra       Neo4j
+------------------------------------------------------------
+Data Model          Documents     Wide-column     Graph
+Relationships       Arrays        Denormalized     Graph edges
+Query Language      MongoDB Query CQL              Cypher
+Schema              Flexible      Defined tables   Flexible
+Best Use            Flexible      High-scale       Relationships
+                    documents    distributed data traversal
+
+Query Results:
+All three databases returned equivalent results for
+the three university enrollment queries.
+
+------------------------------------------------------------
+5. HYBRID ARCHITECTURE
+------------------------------------------------------------
+
+Proposed architecture:
+
+MongoDB:
+Stores operational university data such as student and
+course information.
+
+Cassandra:
+Stores high-volume enrollment activity and audit logs.
+
+Neo4j:
+Stores student-course relationships and supports
+relationship-based queries.
+
+Benefits:
+- Flexible document storage.
+- Scalable distributed data storage.
+- Efficient relationship traversal.
+- Each database handles workloads suited to its model.
+
+------------------------------------------------------------
+6. CONCLUSION
+------------------------------------------------------------
+
+The university course enrollment system was successfully
+implemented using MongoDB, Cassandra, and Neo4j.
+
+Three equivalent queries were executed in each database:
+1. Find all courses for a student.
+2. Find all students in a course.
+3. Find students who share a course.
+
+All three databases returned matching results.
+
+MongoDB provides flexible document storage, Cassandra
+supports query-driven distributed storage, and Neo4j
+provides graph-based relationship traversal.
+
+The activity demonstrates how different database models
+can represent and query the same dataset and how a hybrid
+architecture can combine their strengths.
+
+============================================================
+END OF ACTIVITY 16.1
+============================================================
